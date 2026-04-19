@@ -9,7 +9,7 @@ An agentic pipeline that takes a raw course curriculum and produces:
 - Generated PPTs per lecture
 - Generated lecture notes per lecture (informed by PPT content)
 
-Designed to process **200+ courses** running on **2 × DGX nodes (8 × H100 each)**.
+
 
 ---
 
