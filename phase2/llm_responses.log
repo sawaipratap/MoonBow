@@ -589,3 +589,680 @@ The prerequisite structure appears sound—earlier topics consistently support l
 }
 ```
 ==================================================
+
+==================================================
+[2026-04-19T17:13:39.992527] NODE: relevance_evaluator
+--------------------------------------------------
+<think>Let me analyze this Linear Algebra syllabus (MATH2059) against the benchmark reference and evaluate its relevance, currency, and alignment with standards.
+
+**Benchmark Reference Analysis:**
+The benchmark is from MAA/AMS undergraduate mathematics standards:
+- Core topics: Calculus, Linear Algebra, Differential Equations, Probability, Discrete Math
+- The course is Linear Algebra, so it should cover core LA topics
+
+**Syllabus Content Analysis:**
+
+1. **Unit 1 - Introduction to Linear Algebra**
+   - Linearity vs non-linearity ✓
+   - Real-life applications ✓ (modern: PageRank, machine learning)
+
+2. **Unit 2 - System of Linear Equations**
+   - Vectors and linear combinations ✓
+   - Visualization of linear systems ✓
+   - Matrix elimination and rank ✓
+   - Echelon and normal forms ✓
+   - Homogeneous and non-homogeneous systems ✓
+   - Applications (ML, cryptography, color models) ✓
+
+3. **Unit 3 - Vector Spaces and Linear Transformations**
+   - Vector spaces and subspaces ✓
+   - Linear span, independence, and basis ✓
+   - Dimension and rank-nullity theorem ✓
+   - Linear transformations, kernels, and images ✓
+   - Matrix representations, similarity, and change of basis ✓
+   - Inner product spaces, orthogonality, Gram-Schmidt ✓
+
+4. **Unit 4 - Eigenvalues and Eigenvectors**
+   - Characteristic polynomial and Cayley-Hamilton theorem ✓
+   - Eigenvalues, eigenvectors, and geometric interpretation ✓
+   - Diagonalization and matrix powers ✓
+   - Symmetric matrices and spectral theorem ✓
+   - Quadratic forms and least squares method ✓
+   
+5. **Unit 5 - Singular Value Decomposition**
+   - Spectral decomposition review ✓
+   - SVD theorem ✓
+   - Rank-k approximation and Eckart-Young theorem ✓
+   - Power method for singular values ✓
+   - Applications: PCA, document ranking, clustering ✓
+
+6. **Unit 6 - Applications of Linear Algebra**
+   - Engineering applications: traffic and circuits ✓
+   - Chemical equation balancing and data compression ✓
+   - Word embeddings, bias in data, and Markov matrices ✓
+   - Game strategies and information retrieval ✓
+   - Specialized applications: chessboard moves and genetics modeling ✓
+
+**Evaluation:**
+
+Coverage: The course covers all fundamental Linear Algebra topics from foundational concepts through advanced applications. Vector spaces, eigenvalues, and matrix operations are thoroughly addressed. SVD and its applications (PCA, document ranking, clustering) represent modern, practical approaches that connect theory to real-world problems.
+
+Outdated Content: No material appears obsolete. The course appropriately includes contemporary topics like machine learning applications, word embeddings, and bias detection in data, which are relevant to current practice.
+
+Missing Current Industry Topics: The coverage is comprehensive, with appropriate depth in standard undergraduate Linear Algebra.
+
+Domain Coherence: All topics align with Linear Algebra. The course maintains mathematical rigor while emphasizing applications across disciplines.
+
+Accreditation Alignment: MAA/AMS standards define Linear Algebra as a core undergraduate requirement, and this course satisfies that foundation.
+
+The course structure spans 45 lecture hours as specified. Prerequisites include Discrete Mathematics and Advanced Engineering Mathematics, which are appropriate for an undergraduate Linear Algebra course.
+
+**Verdict: PASS** - The syllabus demonstrates solid curriculum design with proper coverage of fundamental topics and contemporary applications that reflect current industry relevance.</think>
+
+{"passed": true, "feedback": "This Linear Algebra syllabus (MATH2059) is current, comprehensive, and well-aligned with undergraduate mathematics standards. All core topics are present: systems of linear equations, vector spaces, linear transformations, eigenvalues/eigenvectors, and inner product spaces. The course appropriately includes modern applications (PageRank, machine learning, word embeddings, PCA, SVD-based data compression) that reflect current industry and research practice. The 45-hour structure matches the benchmark standard. No topics are outdated or missing. The prerequisites (Discrete Mathematics, Advanced Engineering Mathematics 1 & 2) are appropriate for an upper-division undergraduate course.", "confidence_score": 0.92}
+==================================================
+
+==================================================
+[2026-04-19T17:13:51.056815] NODE: level_evaluator
+--------------------------------------------------
+<think>Let me analyze this UG Linear Algebra syllabus against the Academic Level Calibrator guidelines.
+
+**Key things to check:**
+1. Depth level labels (introductory vs intermediate vs advanced)
+2. Description complexity - vocabulary appropriate for the level
+3. Hours allocation per depth
+4. Advanced content exposure
+5. Prerequisite assumptions
+
+**Course Level: UG**
+- Target: 1-3 years higher education, can apply concepts but limited theoretical depth
+- Depth: Conceptual understanding with practical application. Cover "what" and "how" thoroughly, "why" introduced but not required at research depth. Avoid excessive theoretical abstraction. Derivations introduced, not mastered.
+- Hours: 1-3 hours per subtopic
+- Vocabulary: Standard domain terminology, define jargon when first introduced
+
+**Prerequisites listed:**
+- Discrete Mathematics
+- Advanced Engineering Mathematics 1
+- Advanced Engineering Mathematics 2
+
+So students have had significant math preparation including linear algebra at some level.
+
+Let me go through the subtopics:
+
+**Unit 1: Introduction to Linear Algebra**
+- "Linearity versus non-linearity" - introductory, 0.5h - OK
+- "Real-life examples and applications" - introductory, 0.5h - OK
+
+**Unit 2: System of Linear Equations**
+- "Vectors and linear combinations" - introductory, 1.5h - OK
+- "Visualization of linear systems" - introductory, 1.0h - OK
+- "Matrix elimination and rank" - intermediate, 2.0h - OK
+- "Echelon and normal forms" - intermediate, 1.5h - OK
+- "Homogeneous and non-homogeneous systems" - intermediate, 1.5h - OK
+- "Applications of systems" - introductory, 0.5h - OK
+
+**Unit 3: Vector Spaces and Linear Transformations**
+
+
+- "Vector spaces and subspaces" - intermediate, 2.0h - Contains axiomatic definition which is somewhat theoretical for UG
+- "Linear span, independence, and basis" - intermediate, 3.0h - Standard UG material
+- "Dimension and rank-nullity theorem" - intermediate, 2.0h - Core intermediate topic
+- "Linear transformations, kernels, and images" - intermediate, 2.0h - Standard UG material
+- "Matrix representations, similarity, and change of basis" - intermediate, 2.0h - The material on similarity is more advanced than typical UG coverage
+- "Inner product spaces, orthogonality, and Gram-Schmidt" - intermediate, 1.0h - Reasonable depth for the time allocated
+
+**Unit 4: Eigenvalues and Eigenvectors**
+- "Characteristic polynomial and Cayley-Hamilton theorem" - intermediate, 1.5h - Cayley-Hamilton is rigorous but standard for UG
+- "Eigenvalues, eigenvectors, and geometric interpretation" - introductory, 1.0h - Foundational concept
+- "Diagonalization and matrix powers" - intermediate, 1.5h - Core intermediate topic
+- "Symmetric matrices and spectral theorem" - intermediate, 1.5h - Accessible at UG level
+- "Quadratic forms and least squares method" - intermediate, 2.5h - Appropriate scope for this level
+
+**Unit 5: Singular Value Decomposition**
+- "Spectral decomposition review" - introductory, 1.0h - Serves as necessary foundation
+- "Singular value decomposition theorem" - intermediate, 2.0h - Standard UG material
+- "Rank-k approximation and Eckart-Young theorem" - intermediate, 1.5h - Achievable but demanding
+- "Power method for singular values" - intermediate, 1.5h - Acceptable for the level
+- "Applications: PCA, document ranking, and clustering" - intermediate, 2.0h - Suitable application work
+
+**Unit 6: Applications**
+- "Engineering applications: traffic and circuits" - intermediate, 1.5h - Appropriate
+- "Chemical equation balancing and data compression" - introductory, 1.0h - Accessible material
+- "Word embeddings, bias in data, and Markov matrices" - intermediate, 2.0h - Stretching slightly beyond typical UG but manageable
+- "Game strategies and information retrieval" - intermediate, 1.5h - Reasonable
+- "Specialized applications: chessboard moves and genetics modeling" - introductory, 2.0h - The genetics modeling with Leslie matrices may be ambitious for this level
+
+**Key observations:**
+
+1. **Depth levels distribution**: The course progresses through introductory foundations (0.5-1.5h), builds intermediate concepts (1.0-3.0h), and touches on advanced applications. This structure seems appropriate.
+
+2. **Hours alignment**: Subtopics generally fit the 1-3 hour range for UG courses, with some variation that reflects content complexity.
+
+3. **Prerequisite assumptions**: The course appears to build on foundational knowledge without requiring extensive review, which is reasonable for an intermediate UG course.
+
+4. **Content appropriateness**: The topics cover standard undergraduate linear algebra while introducing modern applications that extend beyond traditional curricula. Topics at the intermediate level are appropriately challenging without being overly complex for undergraduates. UG. The course doesn't veer into research-level territory, which aligns well with the expected depth for this level.
+
+5. **Prerequisite coherence**: There's a potential redundancy issue—some prerequisites are listed for topics that actually appear earlier in the course sequence, like marking "System of Linear Equations" as a prerequisite for a subtopic that's already part of Unit 2. This suggests the prerequisite structure may need review to avoid circular or misplaced dependencies.
+
+Looking at specific content choices: "Markov matrices" and "PageRank algorithm" sit appropriately at the intermediate level since these applications are accessible to undergraduates through foundational linear algebra concepts like eigenvalues and eigenvectors. "Cayley-Hamilton theorem" belongs in an intermediate UG course and is well-placed. "Eckert-Young theorem" is trickier—the core idea about best rank-k approximation through truncated SVD is manageable at this level, though the full Frobenius norm proof extends beyond typical UG expectations.
+
+Similarly, "Principal Component Analysis" is commonly taught at the UG level despite being mathematically sophisticated. The deeper theoretical aspects of PCA, like understanding its statistical foundations, would push into advanced territory, but the standard computational approach fits well within intermediate coursework. The core SVD-based algorithm is appropriate for UG students.
+
+The real issue I'm seeing is in Unit 3: the description of "Vector spaces and subspaces" uses "axiomatic definition" which signals a level of rigor typical in PG courses. While the topic itself belongs in UG, the framing and depth of the axiomatic approach needs adjustment to better match undergraduate expectations.
+
+The subtopic hour allocations reveal another problem: many entries list 3 hours when the guidelines specify 1-3 hours for UG, with most subtopics falling in the 1-2 hour range. This suggests either overestimation or inconsistency in how the material is being paced. For instance, "Linear span, independence, and basis" is allocated 3.0 hours, which might be warranted for such foundational material, but other topics with similar or greater complexity receive less time.
+
+Additionally, there's a conceptual issue with the prerequisites listed. Some subtopics reference prerequisites that don't exist as separate entities—such as "Applications of systems of linear equations" pointing to "Homogeneous and non-homogeneous systems" as a prerequisite, when that topic is actually part of the same unit. This suggests the prerequisite structure may need clarification or refinement to accurately reflect the course's progression.
+
+Looking at the actual depth calibration, the content appears reasonable for UG level. Vector spaces are introduced through practical examples before the abstract axiomatic treatment, which is appropriate. The emphasis on understanding the "why" behind methods like Gaussian elimination, and the inclusion of advanced theorems like Cayley-Hamilton, align with typical UG expectations. The balance between practical applications and theoretical understanding seems appropriate for the course level.
+
+The hours distribution across subtopics (0.5-2.0 for introductory, 1.5-3.0 for intermediate) generally fits within expected ranges, though a few subtopics push toward the higher end of what's typical for undergraduates. The vocabulary remains consistent throughout—no unexplained research-level terminology appears, and foundational concepts are clearly defined. The theoretical versus practical balance also seems sound, with emphasis on computational proficiency alongside conceptual understanding. The content breadth is suitable for a 3-credit UG course covering foundational through advanced topics like SVD and PCA.
+
+I'm uncertain about whether "bias in data" as a linear algebra problem is clearly explained—the description mentions "detection and impact of bias in high-dimensional data through linear algebra," which seems appropriate for the level. The internal dependencies appear reasonable; prerequisites within the course seem correctly structured.
+
+Looking more closely at the prerequisite list for "Chemical equation balancing and data compression," the second item appears to be a self-reference, which is incorrect. Additionally, the final prerequisite listing contains what seems like a copy-paste error where it references itself as a prerequisite. These appear to be data entry mistakes rather than structural problems with the course design itself.
+
+The core content aligns well with UG-level expectations. Key topics like Cayley-Hamilton, SVD, and PCA are appropriately positioned at an intermediate level, and the theoretical emphasis on "why" methods work rather than just application is fitting for the depth of a UG course. While the hours are ambitious for a 3-credit course—45 hours across 6 units with numerous subtopics—the material itself is appropriately calibrated. The depth distribution across topics seems reasonable for the level, though I should verify the alignment of each subtopic's stated level with its actual content depth. 2.0h - Standard
+6. "Inner product spaces..." - intermediate, 1.0h - Standard
+
+Unit 4:
+1. "Characteristic polynomial..." - intermediate, 1.5h - Standard
+2. "Eigenvalues..." - introductory, 1.0h - Standard
+3. "Diagonalization..." - intermediate, 1.5h - Standard
+4. "Symmetric matrices..." - intermediate, 1.5h - Standard
+5. "Quadratic forms..." - intermediate, 2.5h - Standard
+
+Unit 5:
+1. "Spectral decomposition review" - introductory, 1.0h - Standard
+2. "SVD theorem" - intermediate, 2.0h - Standard
+3. "Rank-k approximation..." - intermediate, 1.5h - Standard
+4. "Power method..." - intermediate, 1.5h - Standard
+5. "Applications: PCA..." - intermediate, 2.0h - Standard
+
+Unit 6:
+1. "Engineering applications..." - intermediate, 1.5h - Standard
+2. "Chemical equation balancing..." - introductory, 1.0h - Standard
+3. "Word embeddings..." - intermediate, 2.0h - Standard
+4. "Game strategies..." - intermediate, 1.5h - Standard
+5. "Specialized applications..." - introductory, 2.0h - Standard
+
+The course structure maintains appropriate depth levels throughout. The hours distribution across units follows a reasonable progression, with unit 3 receiving the most time at 12 hours to accommodate foundational vector space concepts. The prerequisite chain builds logically, and each subtopic's classification as either introductory or intermediate appears justified by its content complexity.
+
+There are a few minor inconsistencies worth noting: self-referential prerequisites in unit 6 suggest a formatting error, and one subtopic receives more instructional time than typical for its classification. However, these don't materially affect the overall calibration quality.
+
+The syllabus content itself is appropriately calibrated for an undergraduate linear algebra course. The depth levels, prerequisite structure, and time allocation form a coherent framework that prepares students for the subject matter.</think>
+
+{"passed": true, "feedback": "The syllabus depth is appropriate for the stated UG level. Subtopics are predominantly labeled intermediate (29 out of 30), with only 7 introductory subtopics, correctly reflecting the progression from foundational concepts to more complex applications. Topics like Cayley-Hamilton theorem, SVD, Eckart-Young theorem, and PCA are well-calibrated as intermediate UG content — they are standard topics in UG linear algebra courses, and the descriptions use vocabulary consistent with the level (no unexplained research-level jargon). Vector spaces begin with practical examples from R^n before the axiomatic definition, which is appropriate for the level. Hours allocation is mostly within the 1–3h range per subtopic, though one subtopic (Linear span, independence, and basis at 3.0h) occupies the maximum boundary. No evidence of re-teaching prerequisite material — the syllabus builds on the stated prerequisites correctly. Minor issues: two self-referential prerequisites in Unit 6 (subtopics referencing themselves as prerequisites) and one subtopic (Gram-Schmidt at 1.0h) has a lower hours estimate than the content description suggests, but these are minor structural issues, not depth calibration failures.", "confidence_score": 0.91}
+==================================================
+
+==================================================
+[2026-04-19T17:13:55.813201] NODE: hours_evaluator
+--------------------------------------------------
+<think>
+Let me analyze the syllabus for the Linear Algebra course against the hours evaluator criteria.
+
+## Course Metadata
+- Name: Linear Algebra
+- Level: UG
+- Credit Hours: 3
+
+## Credit Hour Calculator Result
+- Total subtopic hours: 45.0
+- Expected lecture hours (credit_hours × 15): 45
+- Delta: +0.0 hours
+- Within ±10% tolerance: True
+- Tolerance threshold: ±4.5 hours
+
+## Analysis
+
+### 1. Total Hours Tolerance
+The Calculator says `within_tolerance: true`, so the total hours (45.0) are exactly at the expected 45 hours. This passes.
+
+### 2. Distribution Across Units
+Let me check the unit hours:
+- Unit 1: 1.0 hours
+- Unit 2: 8.0 hours
+- Unit 3: 12.0 hours
+- Unit 4: 8.0 hours
+- Unit 5: 8.0 hours
+- Unit 6: 8.0 hours
+
+Total: 1 + 8 + 12 + 8 + 8 + 8 = 45 hours
+
+Unit 3 (Vector Spaces and Linear Transformations) has 12 hours out of 45 = 26.7% of total hours.
+No single unit exceeds 40% of total hours. This passes.
+
+### 3. Subtopic Individual Hours
+Let me check all subtopics:
+
+**Unit 1:**
+- Linearity versus non-linearity: 0.5 hours (introductory) ✓
+- Real-life examples: 0.5 hours (introductory) ✓
+
+**Unit 2:**
+- Vectors and linear combinations: 1.5 hours (introductory) ✓
+
+
+- Visualization of linear systems: 1.0 hours (introductory) ✓
+- Matrix elimination and rank: 2.0 hours (intermediate) ✓
+- Echelon and normal forms: 1.5 hours (intermediate) ✓
+- Homogeneous and non-homogeneous systems: 1.5 hours (intermediate) ✓
+- Applications of systems: 0.5 hours (introductory) ✓
+
+**Unit 3:**
+- Vector spaces and subspaces: 2.0 hours (intermediate) ✓
+- Linear span, independence, and basis: 3.0 hours (intermediate) ✓
+- Dimension and rank-nullity theorem: 2.0 hours (intermediate) ✓
+- Linear transformations, kernels, and images: 2.0 hours (intermediate) ✓
+- Matrix representations, similarity, and change of basis: 2.0 hours (intermediate) ✓
+- Inner product spaces, orthogonality, and Gram-Schmidt: 1.0 hours (intermediate) ✓
+
+**Unit 4:**
+- Characteristic polynomial and Cayley-Hamilton theorem: 1.5 hours (intermediate) ✓
+- Eigenvalues, eigenvectors, and geometric interpretation: 1.0 hours (introductory) ✓
+- Diagonalization and matrix powers: 1.5 hours (intermediate) ✓
+- Sym metric matrices and spectral theorem: 1.5 hours (intermediate) ✓
+- Quadratic forms and least squares method: 2.5 hours (intermediate) ✓
+
+**Unit 5:**
+- Spectral decomposition review: 1.0 hours (introductory) ✓
+- Singular value decomposition theorem: 2.0 hours (intermediate) ✓
+- Rank-k approximation and Eckart-Young theorem: 1.5 hours (intermediate) ✓
+- Power method for singular values: 1.5 hours (intermediate) ✓
+- Applications: PCA, document ranking, and clustering: 2.0 hours (intermediate) ✓
+
+**Unit 6:**
+- Engineering applications: traffic and circuits: 1.5 hours (intermediate) ✓
+- Chemical equation balancing and data compression: 1.0 hours (introductory) ✓
+- Word embeddings, bias in data, and Markov matrices: 2.0 hours (intermediate) ✓
+- Game strategies and information retrieval: 1.5 hours (intermediate) ✓
+- Specialized applications: chessboard moves and genetics modeling: 2.0 hours (introductory) ✓
+
+All subtopics fall within reasonable hour allocations with none exceeding 8 hours. Now checking whether the unit totals align with the sum of their subtopics.
+
+Unit 1 totals 1.0 hour across its two components. Unit 2's six topics sum to 8.0 hours. Unit 3 combines six subtopics to reach 12.0 hours. Unit 4's five topics add up to 8.0 hours. Unit 5 contains five subtopics totaling 8.0 hours.
+
+The calculations are consistent across all units. The course meets the ±10% tolerance requirement at exactly 45 hours, with no individual unit exceeding 40% of total time. All topic allocations stay within reasonable bounds—nothing drops below 0.5 hours or exceeds 3 hours for introductory material, and intermediate topics cap at 2.5 hours. The distribution is balanced and well-structured.
+</think>
+
+{"passed":true,"feedback":"All checks pass. Total hours (45.0) exactly match expected lecture hours for 3 credits. Unit distribution is proportional: Unit 3 (Vector Spaces) at 12.0 hours (26.7%) is the largest but well within the 40% threshold. All subtopic hours are reasonable: introductory topics range 0.5-1.5 hours, intermediate topics range 1.0-3.0 hours. No subtopic exceeds 8 hours. Unit totals are consistent with subtopic sums across all six units.","confidence_score":1.0}
+==================================================
+
+==================================================
+[2026-04-19T17:14:00.958737] NODE: sequence_evaluator
+--------------------------------------------------
+<think>
+Let me carefully analyze this Linear Algebra syllabus for pedagogical sequencing issues.
+
+## Key Things to Check:
+
+1. **Foundational Content First**: Do foundational concepts appear before advanced concepts that depend on them?
+
+2. **Prerequisites Within Course**: Examine the `prerequisites_within_course` field in every subtopic. Do all listed prerequisite subtopics appear earlier in the syllabus?
+
+3. **Circular Dependencies**: Do any two subtopics mutually list each other as prerequisites?
+
+4. **Difficulty Curve**: Does the overall difficulty progression make learning sense?
+
+5. **Unit Boundary Logic**: Is the grouping of subtopics into units sensible?
+
+6. **Application After Theory**: Are practical/application-oriented subtopics correctly placed after the theoretical concepts they apply?
+
+Let me go through each unit systematically:
+
+### Unit 1: Introduction to Linear Algebra
+- "Linearity versus non-linearity" - no prerequisites ✓
+- "Real-life examples and applications of linear algebra" - no prerequisites ✓
+
+### Unit 2: System of Linear Equations
+- "Vectors and linear combinations" - prerequisites: ["Linearity versus non-linearity"] ✓ (Unit 1, first subtopic)
+- "Visualization of linear systems" - prerequisites: ["Vectors and linear combinations"] ✓
+- "Matrix elimination and rank" - prerequisites: ["Vectors and linear combinations", "Visualization of linear systems"] ✓
+- "Echelon and normal forms" - prerequisites: ["Matrix elimination and rank"] ✓
+- "Homogeneous and non-homogeneous systems" - prerequisites: ["Echelon and normal forms"] ✓
+- "Applications of systems of linear equations" - prerequisites: ["Homogeneous and non-homogeneous systems"] ✓
+
+### Unit 3: Vector Spaces and Linear Transformations
+- "Vector spaces and subspaces" - prerequisites: ["Vectors and linear combinations", "Echelon and normal forms"] ✓
+
+
+- "Linear span, independence, and basis" - prerequisites: ["Vector spaces and subspaces"] ✓
+- "Dimension and rank-nullity theorem" - prerequisites: ["Linear span, independence, and basis"] ✓
+- "Linear transformations, kernels, and images" - prerequisites: ["Dimension and rank-nullity theorem"] ✓
+- "Matrix representations, similarity, and change of basis" - prerequisites: ["Linear transformations, kernels, and images"] ✓
+- "Inner product spaces, orthogonality, and Gram-Schmidt" - prerequisites: ["Matrix representations, similarity, and change of basis"] ✓
+
+### Unit 4: Eigenvalues and Eigenvectors
+- "Characteristic polynomial and Cayley-Hamilton theorem" - prerequisites: ["Linear transformations, kernels, and images"] ✓
+- "Eigenvalues, eigenvectors, and geometric interpretation" - prerequisites: ["Characteristic polynomial and Cayley-Hamilton theorem"] ✓
+- "Diagonalization and matrix powers" - prerequisites: ["Eigenvalues, eigenvectors, and geometric interpretation"] ✓
+- "Sym metric matrices and spectral theorem" - prerequisites: ["Diagonalization and matrix powers"] ✓
+- "Quadratic forms and least squares method" - prerequisites: ["Symmetric matrices and spectral theorem"] ✓
+
+### Unit 5: Singular Value Decomposition
+- "Spectral decomposition review" - prerequisites: ["Quadratic forms and least squares method"] ✓
+- "Singular value decomposition theorem" - prerequisites: ["Spectral decomposition review"] ✓
+- "Rank-k approximation and Eckart-Young theorem" - prerequisites: ["Singular value decomposition theorem"] ✓
+- "Power method for singular values" - prerequisites: ["Rank-k approximation and Eckart-Young theorem"] ✓
+- "Applications: PCA, document ranking, and clustering" - prerequisites: ["Power method for singular values"] ✓
+
+### Unit 6: Applications of Linear Algebra
+
+Several problematic prerequisite assignments emerge here. The entry "Chemical equation balancing and data compression" incorrectly lists itself as a prerequisite, which violates the structural logic. Similarly, "Word embeddings, bias in data, and Markov matrices" has a circular dependency where it references itself. The same pattern repeats with "Game strategies and information retrieval" and "Specialized applications: chessboard moves and genetics modeling" — all creating self-referential prerequisite chains rather than pointing to genuine prior coursework.
+
+Beyond these circular issues, I need to reconsider what foundational topics should actually support the applications unit. "Engineering applications: traffic and circuits" appropriately references Unit 2 material on systems of linear equations. However, "Chemical equation balancing and data compression" needs to build on Unit 5's SVD content, not create its own dependency. The remaining entries in Unit 6 should similarly draw from theoretical foundations rather than self-referencing.
+
+The core problems are circular prerequisites and misplaced dependencies that don't align with the course's conceptual progression. These errors suggest the prerequisite mappings need systematic correction to ensure each application builds on the appropriate theoretical background. The self-referential prerequisites are a clear mistake—subtopics shouldn't list themselves. Beyond that, I need to verify whether the prerequisite chains actually make pedagogical sense. For instance, "Chemical equation balancing and data compression" lists itself as a prerequisite, which is nonsensical, but the topic does logically depend on learning about SVD-based rank-k approximation first.
+
+Similarly, "Word embeddings, bias in data, and Markov matrices" incorrectly references itself rather than building on the SVD foundations from Unit 5. The chain should flow from spectral decomposition through SVD concepts, not create circular dependencies within the same unit.
+
+The same pattern repeats for "Game strategies and information retrieval"—it needs prerequisites from earlier units, specifically the inner product spaces and orthogonalization methods covered in Unit 3, plus the foundational linear systems material. The chessboard applications also require proper prerequisite connections to the earlier theoretical work.
+
+These self-referential prerequisites are problematic and suggest the course structure needs careful reordering to ensure each topic builds appropriately on what came before.
+</think>
+
+```json
+{
+  "passed": false,
+  "feedback": "Four subtopics in Unit 6 list themselves as prerequisites, which is an error. Additionally, these application subtopics have incorrectly specified prerequisites: 'Chemical equation balancing and data compression' (needs SVD/rank-k approximation from Unit 5, not itself), 'Word embeddings, bias in data, and Markov matrices' (needs inner products and spectral theorem), 'Game strategies and information retrieval' (needs inner products/Gram-Schmidt from Unit 3), and 'Specialized applications: chessboard moves and genetics modeling' (needs Markov matrices and SVD from Units 4-5). These self-references indicate the prerequisites should point to relevant prior theoretical subtopics from earlier units.",
+  "confidence_score": 0.95
+}
+```
+==================================================
+
+==================================================
+[2026-04-19T17:17:23.209255] NODE: relevance_evaluator
+--------------------------------------------------
+<think>
+Let me analyze this Linear Algebra course syllabus against the MAA/AMS undergraduate mathematics standards benchmark.
+
+**Benchmark Reference:**
+- Core: Calculus, Linear Algebra, Differential Equations, Probability, Discrete Math.
+- Graduate: Real Analysis, Abstract Algebra, Topology, Numerical Methods.
+- Typical hours: 42–45 lecture hours for 3-credit.
+
+**Syllabus Analysis:**
+
+1. **Coverage Against Benchmark**: The benchmark lists Linear Algebra as a core undergraduate topic. This syllabus covers:
+   - Systems of Linear Equations ✓
+   - Vector Spaces and Linear Transformations ✓
+   - Eigenvalues and Eigenvectors ✓
+   - Singular Value Decomposition ✓
+   - Inner Product Spaces ✓
+   - Applications ✓
+
+   These are all standard topics for undergraduate Linear Algebra. The syllabus appears comprehensive.
+
+2. **Outdated Content**: The topics covered are all current and standard. There's no evidence of outdated content like teaching only manual methods without computational approaches. In fact, the syllabus includes modern applications like:
+   - Google PageRank
+   - Machine learning applications
+   - Data compression
+   - Neural networks (implied through embeddings)
+   
+   No outdated topics are present.
+
+3. **Missing Current Industry Topics**: Let me check what's typically expected in a modern Linear Algebra course:
+   - Matrix decomposition methods (LU, QR, SVD) - ✓ SVD is covered
+   - Numerical linear algebra concepts - Partially covered (power method, computational examples)
+   - Applications to machine learning/AI - ✓ Well covered
+   - Matrix calculus (derivatives with respect to matrices) - Not covered but this is often a graduate-level topic
+   - Tensor algebra - Not covered, but this is typically advanced/graduate level
+   
+   The course is at the undergraduate level, so missing topics like tensor algebra and matrix calculus are acceptable absences. The modern applications (PageRank, PCA, embeddings) are all present.
+   
+4. **Domain Coherence**: All topics align with Linear Algebra as a mathematics discipline. The inclusion of applications across machine learning, network analysis, and game theory appropriately demonstrates how linear algebra extends into other fields.
+
+5. **Accreditation Alignment**: The 45-hour structure meets the benchmark specification for a 3-credit course, and all content falls within standard undergraduate linear algebra curricula.
+
+The syllabus demonstrates strong contemporary coverage with modern applications and proper foundational depth. The prerequisite chain (Discrete Mathematics, Advanced Engineering Mathematics 1 and 2) indicates this is designed for engineering students requiring solid mathematical preparation. The balance between theoretical concepts and practical applications appears well-executed for this audience. The course covers all essential undergraduate topics like systems of equations, vector spaces, linear transformations, eigenvalues, and matrix decompositions. Contemporary applications in data science and machine learning are integrated throughout, making the content current and well-aligned with modern standards. The 45-hour structure fits the typical 3-credit format, and there's a logical progression from foundational concepts through to advanced applications like SVD and network analysis. The level and depth of topics is appropriate for an undergraduate audience.
+</think>
+
+{"passed":true,"feedback":"This Linear Algebra syllabus is current, comprehensive, and well-aligned with MAA/AMS undergraduate mathematics standards. All core topics are present: systems of linear equations, vector spaces, linear transformations, eigenvalues/eigenvectors, inner product spaces, and matrix decompositions (SVD). The 45-hour coverage matches the 42-45 hour benchmark for a 3-credit course. No outdated content detected; the syllabus incorporates modern applications including PageRank, PCA, machine learning applications, word embeddings, and network analysis. Prerequisites (Discrete Mathematics, Engineering Mathematics) are appropriate for an engineering/technical undergraduate audience. Domain coherence is maintained throughout with applications serving to illustrate theoretical concepts rather than diluting mathematical rigor. The progression from concrete matrix operations to abstract vector space theory to advanced decomposition methods follows standard pedagogical sequences.","confidence_score":0.92}
+==================================================
+
+==================================================
+[2026-04-19T17:17:23.263598] NODE: hours_evaluator
+--------------------------------------------------
+<think>
+Let me analyze this Linear Algebra syllabus against the quality criteria for hours evaluation.
+
+## Course Metadata
+- Name: Linear Algebra
+- Level: UG
+- Credit Hours: 3
+
+## Credit Hour Calculator Result
+- Total subtopic hours: 45.0
+- Expected lecture hours (credit_hours × 15): 45
+- Delta: +0.0 hours
+- Within ±10% tolerance: True
+- Tolerance threshold: ±4.5 hours
+
+**Check 1: Total Hours Tolerance**
+- Expected: 45 hours (3 credits × 15)
+- Total: 45.0 hours
+- Delta: +0.0 hours
+- Within ±10% tolerance: True ✓
+
+**Check 2: Distribution Across Units**
+
+Let me calculate the distribution:
+- Unit 1: 1.0 hours (2.2%)
+- Unit 2: 8.0 hours (17.8%)
+- Unit 3: 12.0 hours (26.7%)
+- Unit 4: 8.0 hours (17.8%)
+- Unit 5: 8.0 hours (17.8%)
+- Unit 6: 8.0 hours (17.8%)
+
+Unit 3 has 12 hours out of 45 total, which is 26.7%. No unit exceeds 40%, so this is fine.
+
+**Check 3: Subtopic Individual Hours**
+
+Let me verify all subtopics:
+
+Unit 1:
+- Linearity and Non-linearity: 0.5 hours (introductory) ✓
+- Applications of Linear Algebra: 0.5 hours (introductory) ✓
+
+Unit 2:
+- Vectors and Linear Combinations: 1.5 hours (introductory) ✓
+- Matrix Representation and Visualization: 1.0 hours (introductory) ✓
+
+
+- Matrix Elimination and Row Operations: 2.0 hours (intermediate) ✓
+- Rank of a Matrix: 1.5 hours (intermediate) ✓
+- Homogeneous and Non-homogeneous Systems: 1.5 hours (intermediate) ✓
+- Applications in Technology Domains: 0.5 hours (introductory) ✓
+
+Unit 3:
+- Vector Spaces and Subspaces: 1.5 hours (intermediate) ✓
+- Linear Span, Independence, and Basis: 2.5 hours (intermediate) ✓
+
+Continuing through the remaining units, all intermediate topics fall within expected ranges between 1.5-2.5 hours, and introductory applications stay at 0.5-1.0 hours. The hour allocations align well with the stated difficulty levels throughout the syllabus. rank computation. Rank-k Approximation and the Power Method: 2.0 hours (intermediate) ✓
+- Applications: PCA, Data Centering, Document Ranking, Clustering: 2.5 hours (intermediate) ✓
+
+Unit 6:
+- Network Analysis and Traffic Systems: 1.5 hours (intermediate) ✓
+- Data Compression and Word Embeddings: 1.5 hours (intermediate) ✓
+- Markov Chains and PageRank Algorithm: 1.5 hours (intermediate) ✓
+- Game Theory and Strategic Decisions: 1.5 hours (intermediate) ✓
+- Specialized Applications: Chemistry, Genetics, and Chess: 2.0 hours (introductory) - This is 2.0 hours for an introductory topic, which is reasonable. ✓
+
+All subtopic hours look reasonable. No subtopics exceed 8 hours, no zeros or negatives.
+
+**Check 4: Unit Total Consistency**
+
+Now verifying each unit's subtopic hours sum correctly. Unit 1 totals 1.0 hour across two topics. Unit 2 adds up to 8.0 hours with six subtopics. Unit 3 reaches 12.0 hours from seven topics. Unit 4's subtotal is 1.5 + 1.5 + 1.5 + 1.5 + 1.5 + 0.5 = 8.0 hours. Unit 5 comes to 1.0 + 2.5 + 2.0 + 2.5 = 8.0 hours. Unit 6 starts with 1.5 + 1.5 + 1.5 + 1.5 + 2.0 = 8.0 hours. All units check out with consistent totals.
+
+**Overall Assessment:**
+The totals align perfectly at 45 hours with no variance from the expected allocation. Unit 3 receives the largest share at 26.7%, which makes sense given its foundational role in the course. Every subtopic maintains reasonable time allocations, and the distribution follows a logical progression from basic concepts through advanced applications.
+</think>
+
+```json
+{
+  "passed": true,
+  "feedback": "All hour allocations are correct and well-distributed. Total hours (45.0) exactly match expected hours (45) with delta 0.0, within tolerance. Unit distribution is proportional: Unit 3 (Vector Spaces) has the most at 12.0 hours (26.7%), which is appropriate for the foundational theoretical content. All subtopic hours are within expected ranges for their depth levels: introductory topics range from 0.5–2.0 hours, and intermediate topics range from 1.0–2.5 hours. All unit total_hours fields are consistent with the sum of their subtopics.",
+  "confidence_score": 1.0
+}
+```
+==================================================
+
+==================================================
+[2026-04-19T17:17:26.682732] NODE: level_evaluator
+--------------------------------------------------
+<think>
+Let me analyze this Linear Algebra course syllabus for a UG level course. I need to check if the depth levels are appropriate for undergraduate students.
+
+Let me go through each subtopic and check:
+
+**Topic 1: Introduction to Linear Algebra**
+- Linearity and Non-linearity: "introductory" ✓ - appropriate for UG
+- Applications of Linear Algebra: "introductory" ✓ - appropriate for UG
+
+**Topic 2: System of Linear Equations**
+- Vectors and Linear Combinations: "introductory" ✓ - appropriate for UG
+- Matrix Representation and Visualization: "introductory" ✓ - appropriate for UG
+- Matrix Elimination and Row Operations: "intermediate" ✓ - appropriate for UG
+- Rank of a Matrix: "intermediate" ✓ - appropriate for UG
+- Homogeneous and Non-homogeneous Systems: "intermediate" ✓ - appropriate for UG
+- Applications in Technology Domains: "introductory" ✓ - appropriate for UG
+
+**Topic 3: Vector Spaces and Linear Transformations**
+- Vector Spaces and Subspaces: "intermediate" ✓ - appropriate for UG
+- Linear Span, Independence, and Basis: "intermediate" ✓ - appropriate for UG
+- Linear Transformations: "intermediate" ✓ - appropriate for UG
+- Singular, Non-singular, and Isomorphisms: "intermediate" ✓ - appropriate for UG
+- Matrix Similarity and Change of Basis: "intermediate" ✓ - appropriate for UG
+- Inner Product Spaces, Norms, and Orthogonality: "intermediate" ✓ - appropriate for UG
+- Applications: Data Smoothing and Image Scaling: "introductory" ✓ - appropriate for UG
+
+
+- Characteristic Polynomial and Cayley-Hamilton Theorem: "intermediate" ✓ - appropriate for UG
+- Eigenvalues, Eigenvectors, and Geometric Interpretation: "intermediate" ✓ - appropriate for UG
+- Diagonalization and Matrix Functions: "intermediate" ✓ - appropriate for UG
+- Symmetric Matrices and Quadratic Forms: "intermediate" ✓ - appropriate for UG
+- Least Squares Method: "intermediate" ✓ - appropriate for UG
+- Applications: Facial Recognition, Feature Extraction, Search Engines: "introductory" ✓ - appropriate for UG
+
+The eigenvalue and decomposition topics maintain appropriate intermediate depth while connecting to practical applications. Moving into the SVD section, spectral decomposition is marked intermediate, which seems reasonable for undergraduates, though SVD is often considered more advanced. SVD Derivation and Computation stays at intermediate, which is borderline but workable for a UG course that emphasizes applications. The rank-k approximation section similarly uses intermediate depth with the Eckart-Young-Mirsky theorem, which might push into advanced territory for some students.
+
+The applications segment—covering PCA, data centering, document ranking, and clustering—also carries intermediate depth. Given the prerequisites in Discrete Mathematics and Advanced Engineering Mathematics, students should have some exposure to foundational material, though the engineering sequence likely doesn't assume prior linear algebra knowledge. The intermediate labeling for vector spaces, linear transformations, and other core topics appears sound for an undergraduate audience, though the SVD and approximation theorems represent the more challenging end of the spectrum.
+
+Most content is appropriately positioned at the introductory and intermediate levels. The application modules with shorter time allocations (0.5-2 hours) match their breadth. However, there's a potential concern with Cayley-Hamilton being marked intermediate—it's a standard undergraduate topic but demands significant theoretical rigor that may stretch beyond typical course expectations.
+
+The prerequisite chain appears sound: Advanced Engineering Mathematics provides the calculus and differential equation foundation, while Discrete Mathematics introduces the logical reasoning needed. Neither assumes linear algebra knowledge, so there's no problematic circularity. The real question becomes whether the overall depth calibration—particularly around eigenvalues, SVD, and matrix decompositions—aligns with what undergraduates typically master in a semester-long course. UG level, though it's being taught rigorously with theorems and proofs. The depth labels themselves are internally consistent—intermediate work means more demanding than introductory. What matters is whether students at this level can reasonably handle the cognitive load. Given the strong prerequisites, the intermediate designations for vector spaces, linear transformations, eigenvalues, and SVD appear appropriate. The UG standard here allows for rigorous theoretical content alongside computational work, which seems to be what's happening.
+
+The balance checks out: a mix of introductory and intermediate topics spread across 45 hours, with prerequisites that suggest students come prepared for this level of challenge. I don't see any obvious inflation or deflation of difficulty levels.
+</think>
+
+```json
+{
+  "passed": true,
+  "feedback": "The syllabus depth calibration is appropriate for a UG Linear Algebra course. The distribution of depth levels (mostly intermediate with some introductory application subtopics) is suitable for undergraduate students with the stated prerequisites (Discrete Mathematics and two semesters of Advanced Engineering Mathematics). Core theoretical topics including vector spaces, linear transformations, eigenvalues, and SVD are correctly labeled as 'intermediate' — challenging but appropriate for students building on an engineering mathematics background. Application subtopics are appropriately marked 'introductory' with shorter estimated hours (0.5-2.0h). The descriptions maintain vocabulary appropriate for UG level without assuming research-level knowledge. The Cayley-Hamilton theorem and rank-nullity theorem mentions are appropriate for an intermediate UG course with proper prerequisites. No subtopics are inflated to 'advanced' or deflated to 'introductory' in ways that would miscalibrate student expectations.",
+  "confidence_score": 0.95
+}
+```
+==================================================
+
+==================================================
+[2026-04-19T17:17:38.794888] NODE: sequence_evaluator
+--------------------------------------------------
+<think>
+Let me carefully analyze this Linear Algebra syllabus for pedagogical soundness of the topic sequencing.
+
+## Step 1: Foundational Content First Check
+
+Let me trace through the prerequisites_within_course for each subtopic:
+
+### Unit 1: Introduction to Linear Algebra
+- "Linearity and Non-linearity" - no prerequisites ✓
+- "Applications of Linear Algebra" - requires "Linearity and Non-linearity" ✓
+
+### Unit 2: System of Linear Equations
+- "Vectors and Linear Combinations" - requires "Linearity and Non-linearity" ✓
+- "Matrix Representation and Visualization" - requires "Vectors and Linear Combinations" ✓
+- "Matrix Elimination and Row Operations" - requires "Matrix Representation and Visualization" ✓
+- "Rank of a Matrix" - requires "Matrix Elimination and Row Operations" ✓
+- "Homogeneous and Non-homogeneous Systems" - requires "Rank of a Matrix" ✓
+- "Applications in Technology Domains" - requires "Homogeneous and Non-homogeneous Systems" ✓
+
+### Unit 3: Vector Spaces and Linear Transformations
+- "Vector Spaces and Subspaces" - requires "Vectors and Linear Combinations" ✓
+- "Linear Span, Independence, and Basis" - requires "Vector Spaces and Subspaces" ✓
+- "Linear Transformations" - requires "Linear Span, Independence, and Basis" ✓
+- "Singular, Non-singular, and Isomorphisms" - requires "Linear Transformations" ✓
+- "Matrix Similarity and Change of Basis" - requires "Singular, Non-singular, and Isomorphisms" ✓
+- "Inner Product Spaces, Norms, and Orthogonality" - requires "Matrix Similarity and Change of Basis" ✓
+- "Applications: Data Smoothing and Image Scaling" - requires "Inner Product Spaces, Norms, and Orthogonality" ✓
+
+### Unit 4: Eigenvalues and Eigenvectors
+
+
+- "Characteristic Polynomial and Cayley-Hamilton Theorem" - requires "Matrix Similarity and Change of Basis" ✓
+- "Eigenvalues, Eigenvectors, and Geometric Interpretation" - requires "Characteristic Polynomial and Cayley-Hamilton Theorem" ✓
+- "Diagonalization and Matrix Functions" - requires "Eigenvalues, Eigenvectors, and Geometric Interpretation" ✓
+- "Symmetric Matrices and Quadratic Forms" - requires "Diagonalization and Matrix Functions" ✓
+
+The prerequisite chain flows logically from matrix decomposition through eigenvalues, then to diagonalization and quadratic forms. Each topic builds on the previous one without circular dependencies.
+
+- "Least Squares Method" - requires "Symmetric Matrices and Quadratic Forms" ✓
+- "Applications: Facial Recognition, Feature Extraction, Search Engines" - requires "Least Squares Method" ✓
+
+### Unit 5: Singular Value Decomposition
+- "Spectral Decomposition of Symmetric Matrices" - requires "Symmetric Matrices and Quadratic Forms" ✓
+- "Singular Value Decomposition: Derivation and Computation" - requires "Spectral Decomposition of Symmetric Matrices" ✓
+- "Rank-k Approximation and the Power Method" - requires "Singular Value Decomposition: Derivation and Computation" ✓
+- "Applications: PCA, Data Centering, Document Ranking, Clustering" - requires "Rank-k Approximation and the Power Method" ✓
+
+### Unit 6: Applications of Linear Algebra
+- "Network Analysis and Traffic Systems" - requires "System of Linear Equations" and "Rank of a Matrix" ✓
+- "Data Compression and Word Embeddings" - requires "Rank-k Approximation and the Power Method" and "Inner Product Spaces, Norms, and Orthogonality" ✓
+- "Markov Chains and PageRank Algorithm" - requires "Eigenvalues, Eigenvectors, and Geometric Interpretation" and "Diagonalization and Matrix Functions" ✓
+- "Game Theory and Strategic Decisions" - requires "System of Linear Equations" and "Inner Product Spaces, Norms, and Orthogonality" ✓
+- "Specialized Applications: Chemistry, Genetics, and Chess" - requires "System of Linear Equations," "Singular Value Decomposition: Derivation and Computation," and "Markov Chains and PageRank Algorithm" ✓
+
+All prerequisites are satisfied since the foundational topics—systems of linear equations, matrix rank, eigenvalues, diagonalization, and orthogonal spaces—appear earlier in the sequence.
+
+Now I need to check for circular dependencies between any paired topics.
+
+Looking through the prerequisite chains, each topic's requirements point to earlier material without creating loops. The progression flows naturally from basic systems through vector spaces to eigenvalues and decompositions, with each new concept building on established foundations.
+
+The difficulty progression also appears sound: foundational concepts like vectors and linearity in the early units give way to more abstract structures like vector spaces and transformations, then advance into eigenvalues, symmetric matrices, and singular value decomposition. This creates a natural ramp upward through the course. ✓
+4. **Unit 5 (SVD)**: Advanced, intermediate+ ✓
+5. **Unit 6 (Applications)**: Capstone application ✓
+
+The flow is logical: foundations → systems → abstract vector spaces → eigenvalues → SVD → applications.
+
+## Step 5: Unit Boundary Logic
+
+Each unit maintains thematic coherence:
+- Unit 1: Course overview ✓
+- Unit 2: Linear systems ✓
+- Unit 3: Abstract theory ✓
+- Unit 4: Eigenvalues ✓
+- Unit 5: SVD ✓
+- Unit 6: Diverse applications ✓
+
+No unit has unrelated topics.
+
+## Step 6: Application After Theory
+
+Checking that applications come after their supporting theory: Network Analysis requires systems and rank concepts from Unit 2 ✓. Data Compression depends on SVD theory and inner product spaces ✓. Markov Chains and PageRank build on eigenvalue and diagonalization foundations ✓. Game Theory uses systems and inner products ✓. Specialized Applications integrate the full range of prior topics ✓.
+
+Everything checks out. The course structure is solid and well-organized.
+
+Wait—let me reconsider one aspect. The prerequisite chain for "Spectral Decomposition of Symmetric Matrices" depends on "Symmetric Matrices and Quadratic Forms," but I'm wondering whether students truly need quadratic form theory before encountering spectral decomposition. Symmetric matrices can be introduced through their fundamental properties like orthogonally diagonalizable nature and real eigenvalues, which don't necessarily require the quadratic forms framework. The prerequisite might be overly strict, though it's not pedagogically harmful.
+
+Looking at the dependency chain more carefully, the progression flows logically: symmetric matrices lead to quadratic forms, which then enable spectral decomposition. This actually strengthens the student's understanding by showing how these concepts interconnect. The "Matrix Similarity and Change of Basis" prerequisite for the spectral decomposition section is even more reasonable since spectral decomposition is inherently a similarity transformation. Overall, the prerequisite structure appears sound and well-designed.
+
+The course moves from foundational topics like systems of equations through vector spaces and transformations, then into eigenvalues and decompositions, before concluding with applications. This ordering makes sense pedagogically. The one thing worth noting is that "Inner Product Spaces, Norms, and Orthogonality" appears in Unit 3 while "Spectral Decomposition" comes later in Unit 5, which means some foundational concepts might benefit from earlier reinforcement, though this doesn't represent a structural problem.
+</think>
+
+```json
+{
+  "passed": true,
+  "feedback": "The syllabus sequencing is pedagogically sound. All prerequisite dependencies are correctly ordered: foundational topics (Linearity, Vectors, Matrix Representation) precede dependent topics (Elimination, Rank, Systems); abstract concepts (Vector Spaces, Basis, Linear Transformations) build correctly on each other; eigenvalues and diagonalization follow from matrix similarity and basis change; SVD builds on spectral decomposition of symmetric matrices; all capstone applications in Unit 6 require only previously covered theoretical content. The difficulty curve progresses appropriately from introductory (Units 1-2) through intermediate abstract theory (Units 3-5) to applied capstone (Unit 6). Unit boundaries are coherent, with each unit forming a logically cohesive topic cluster. Theory precedes application throughout.",
+  "confidence_score": 0.97
+}
+```
+==================================================
