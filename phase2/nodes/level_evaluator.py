@@ -1,59 +1,68 @@
-import os
 import json
-from phase2.state import Phase2State
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage
+from phase2.state import Phase2State, EvaluatorResult
 from phase2.config import config
 from phase2.logger import log_llm_response
-from phase2.dependencies import get_skill_loader
-from phase2.utils import parse_evaluation
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import SystemMessage, HumanMessage
+import os
 
 
-def _load_prompt(filename: str) -> str:
-    path = os.path.join(config.PROMPTS_DIR, filename)
+def _load_prompt() -> str:
+    path = os.path.join(config.PROMPTS_DIR, "level_evaluator_prompt.md")
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
 
 def level_evaluator_node(state: Phase2State) -> dict:
-    print("[level_evaluator] Starting depth calibration check...")
-
-    skill_loader = get_skill_loader()
-    level_calibrator = skill_loader.load("academic_level_calibrator.md")
-
-    syllabus = state.syllabus_draft
-    meta = syllabus.course_metadata
-
-    context = f"""## Course Metadata
-- Name: {meta.course_name}
-- Code: {meta.course_code}
-- Level: {meta.course_level}
-- Domain: {meta.domain}
-- Credit Hours: {meta.credit_hours}
-- Prerequisites: {', '.join(meta.prerequisites) or 'None'}
-
-## Academic Level Calibrator Skill
-{level_calibrator}
-
-## Syllabus to Evaluate
-{json.dumps(syllabus.model_dump(), indent=2)}
-"""
-
     llm = ChatOpenAI(
         base_url=config.LLM_BASE_URL,
         api_key=config.LLM_API_KEY,
         model=config.LLM_MODEL_NAME,
-        temperature=config.LLM_TEMPERATURE,
-        max_tokens=config.LLM_MAX_TOKENS,
+        temperature=0.0,   # deterministic — evaluation must be reproducible
+        max_tokens=config.LLM_MAX_TOKENS
     )
 
-    system_prompt = _load_prompt("level_evaluator_prompt.md")
-    response = llm.invoke([
-        SystemMessage(content=system_prompt),
-        HumanMessage(content=context)
-    ])
+    prompt_template = _load_prompt()
+    syllabus_json = json.dumps(state.syllabus_draft.model_dump(), indent=2)
+
+    prompt = prompt_template.format(
+        level_calibrator_skill=state.level_calibrator_skill,
+        course_level=state.syllabus_draft.course_metadata.course_level,
+        syllabus_json=syllabus_json
+    )
+
+    response = llm.invoke([HumanMessage(content=prompt)])
     log_llm_response("level_evaluator", response.content)
 
-    result = parse_evaluation(response.content, "level_evaluator")
-    print(f"[level_evaluator] passed={result.passed} | confidence={result.confidence_score:.2f}")
-    return {"level_evaluation": result}
+    result = _parse_evaluator_response(response.content, "level")
+    print(f"[level_evaluator] Result: {'PASS' if result.passed else 'FAIL'} "
+          f"(score={result.score:.2f})")
+    return {"level_eval_result": result}
+
+
+def _parse_evaluator_response(raw: str, evaluator_name: str) -> EvaluatorResult:
+    """Extract JSON from LLM response and parse into EvaluatorResult."""
+    try:
+        start = raw.find("{")
+        end = raw.rfind("}") + 1
+        if start == -1 or end == 0:
+            raise ValueError("No JSON object found in response")
+        data = json.loads(raw[start:end])
+        score = float(data.get("score", 0.0))
+        passed = data.get("pass", score >= config.EVALUATOR_PASS_THRESHOLD)
+        return EvaluatorResult(
+            evaluator=evaluator_name,
+            passed=passed,
+            score=score,
+            feedback=data.get("feedback", ""),
+            status="passed" if passed else "failed"
+        )
+    except (json.JSONDecodeError, ValueError, KeyError) as e:
+        print(f"[{evaluator_name}_evaluator] Failed to parse LLM response: {e}")
+        return EvaluatorResult(
+            evaluator=evaluator_name,
+            passed=False,
+            score=0.0,
+            feedback=f"Evaluator failed to parse LLM response. Raw: {raw[:300]}",
+            status="failed"
+        )

@@ -1,0 +1,38 @@
+# ============================================================
+# MoonBow — Python Dependencies
+# Install inside venv:
+#   pip install -r requirements.txt
+# ============================================================
+
+# Core
+python-dotenv
+pydantic
+
+# LLM + Agents
+langchain-openai
+langchain-core
+langgraph
+
+# MCP — MinIO (file storage)
+minio
+pdfminer.six
+
+# MCP — PostgreSQL
+psycopg2-binary
+
+# -------------------------------------------------------
+# Uncomment when Qdrant is provisioned (Phase 1 similarity search)
+# -------------------------------------------------------
+# qdrant-client
+# sentence-transformers
+
+# -------------------------------------------------------
+# Uncomment when building Phase 5a (PPTX rendering)
+# -------------------------------------------------------
+# python-pptx
+
+# -------------------------------------------------------
+# Uncomment when building Phase 5b (Notes PDF rendering)
+# -------------------------------------------------------
+# weasyprint
+# markdown

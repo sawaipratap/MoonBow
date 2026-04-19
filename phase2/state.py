@@ -1,29 +1,37 @@
 from typing import Optional
 from pydantic import BaseModel
-from phase1.state import SyllabusDraft
 
-class EvaluationResult(BaseModel):
+# Reuse Phase 1 data models — Phase 2 works on the same SyllabusDraft structure
+from phase1.state import SyllabusDraft, CourseMetadata
+
+
+class EvaluatorResult(BaseModel):
+    evaluator: str          # "level" | "sequence" | "hours" | "relevance"
     passed: bool
-    feedback: str
-    confidence_score: float = 1.0
+    score: float            # 0.0–1.0
+    feedback: str           # specific, actionable description of what failed
+    status: str             # "passed" | "failed" | "skipped"
+
 
 class Phase2State(BaseModel):
-    # Input field - parsed from Phase 1 output
+    # Input — set at graph entry
+    course_code: str = ""
     syllabus_draft: Optional[SyllabusDraft] = None
+    phase1_status: str = ""             # "passed" | "force_passed" from Phase 1
 
-    # Injected context - set by skill_injector node
+    # Injected skill — set by skill_injector node
     level_calibrator_skill: str = ""
 
-    # Phase Evaluator Nodes Output variables (Parallel)
-    level_evaluation: Optional[EvaluationResult] = None
-    sequence_evaluation: Optional[EvaluationResult] = None
-    hours_evaluation: Optional[EvaluationResult] = None
-    relevance_evaluation: Optional[EvaluationResult] = None
+    # Evaluator outputs — set in parallel by the 4 evaluator nodes
+    level_eval_result: Optional[EvaluatorResult] = None
+    sequence_eval_result: Optional[EvaluatorResult] = None
+    hours_eval_result: Optional[EvaluatorResult] = None
+    relevance_eval_result: Optional[EvaluatorResult] = None
 
-    # Output fields (Set by Aggregator)
-    aggregated_feedback: str = ""
-    # "passed", "failed_needs_phase1_rework", "failed_unexpectedly", ""
-    phase_status: str = ""  
+    # Output — set by aggregator and output_writer
+    phase_status: str = ""              # "passed" | "failed" | "returned_to_phase1"
+    phase_error: str = ""
+    compiled_feedback: str = ""         # sent back to Phase 1 expander if any evaluator fails
 
     class Config:
         arbitrary_types_allowed = True

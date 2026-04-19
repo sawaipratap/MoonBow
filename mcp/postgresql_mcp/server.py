@@ -49,7 +49,15 @@ All tables use JSONB for structured content. Schema DDL is in db/schema.sql (to 
 """
 
 import os
+import json
 from typing import Optional
+
+try:
+    import psycopg2
+    import psycopg2.extras
+    _PSYCOPG2_AVAILABLE = True
+except ImportError:
+    _PSYCOPG2_AVAILABLE = False
 
 
 # ---------------------------------------------------------------------------
@@ -62,6 +70,23 @@ DB_NAME: str = os.getenv("POSTGRES_DB", "moonbow")
 DB_USER: str = os.getenv("POSTGRES_USER", "moonbow_user")
 DB_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "")
 DB_POOL_SIZE: int = int(os.getenv("POSTGRES_POOL_SIZE", "5"))
+
+
+# ---------------------------------------------------------------------------
+# Connection Helper
+# ---------------------------------------------------------------------------
+
+def _get_conn():
+    """Opens and returns a new psycopg2 connection."""
+    if not _PSYCOPG2_AVAILABLE:
+        raise ImportError("psycopg2-binary not installed. Run: pip install psycopg2-binary")
+    return psycopg2.connect(
+        host=DB_HOST,
+        port=DB_PORT,
+        dbname=DB_NAME,
+        user=DB_USER,
+        password=DB_PASSWORD
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -90,10 +115,24 @@ def write_syllabus(
         ConnectionError: if DB connection fails
         ValueError: if syllabus dict fails JSONB schema validation
     """
-    raise NotImplementedError(
-        "write_syllabus: PostgreSQL not yet connected. "
-        "Use MockDBWriter via dependencies.py in mock mode."
-    )
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO syllabuses (course_code, syllabus, phase_status, iteration_count)
+            VALUES (%s, %s, %s, %s)
+            ON CONFLICT (course_code) DO UPDATE
+            SET syllabus = EXCLUDED.syllabus,
+                phase_status = EXCLUDED.phase_status,
+                iteration_count = EXCLUDED.iteration_count,
+                created_at = NOW()
+        """, (course_code, json.dumps(syllabus), phase_status, iteration_count))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] write_syllabus failed: {e}") from e
+    return course_code
 
 
 def check_syllabus_exists(course_code: str) -> bool:
@@ -110,10 +149,16 @@ def check_syllabus_exists(course_code: str) -> bool:
     Raises:
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError(
-        "check_syllabus_exists: PostgreSQL not yet connected. "
-        "Use MockDBWriter.check_syllabus_exists() in mock mode."
-    )
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT 1 FROM syllabuses WHERE course_code = %s", (course_code,))
+        exists = cur.fetchone() is not None
+        cur.close()
+        conn.close()
+        return exists
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] check_syllabus_exists failed: {e}") from e
 
 
 # ---------------------------------------------------------------------------
@@ -135,7 +180,22 @@ def read_syllabus(course_code: str) -> dict:
         KeyError: if no syllabus found for course_code
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError("read_syllabus: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT syllabus, phase_status, iteration_count FROM syllabuses WHERE course_code = %s",
+            (course_code,)
+        )
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] read_syllabus failed: {e}") from e
+    if not row:
+        raise KeyError(f"No syllabus found for course_code: {course_code}")
+    syllabus_data = row[0] if isinstance(row[0], dict) else json.loads(row[0])
+    return {"syllabus": syllabus_data, "phase_status": row[1], "iteration_count": row[2]}
 
 
 def write_refined_syllabus(
@@ -158,7 +218,23 @@ def write_refined_syllabus(
     Raises:
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError("write_refined_syllabus: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO refined_syllabuses (course_code, syllabus, evaluation_results)
+            VALUES (%s, %s, %s)
+            ON CONFLICT (course_code) DO UPDATE
+            SET syllabus = EXCLUDED.syllabus,
+                evaluation_results = EXCLUDED.evaluation_results,
+                created_at = NOW()
+        """, (course_code, json.dumps(syllabus), json.dumps(evaluation_results)))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] write_refined_syllabus failed: {e}") from e
+    return course_code
 
 
 # ---------------------------------------------------------------------------
@@ -180,7 +256,21 @@ def read_refined_syllabus(course_code: str) -> dict:
         KeyError: if no refined syllabus found for course_code
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError("read_refined_syllabus: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT syllabus FROM refined_syllabuses WHERE course_code = %s",
+            (course_code,)
+        )
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] read_refined_syllabus failed: {e}") from e
+    if not row:
+        raise KeyError(f"No refined syllabus found for course_code: {course_code}")
+    return row[0] if isinstance(row[0], dict) else json.loads(row[0])
 
 
 def write_course_outcomes(cos: dict, course_code: str) -> str:
@@ -197,7 +287,21 @@ def write_course_outcomes(cos: dict, course_code: str) -> str:
     Raises:
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError("write_course_outcomes: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO course_outcomes (course_code, outcomes)
+            VALUES (%s, %s)
+            ON CONFLICT (course_code) DO UPDATE
+            SET outcomes = EXCLUDED.outcomes, created_at = NOW()
+        """, (course_code, json.dumps(cos)))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] write_course_outcomes failed: {e}") from e
+    return course_code
 
 
 # ---------------------------------------------------------------------------
@@ -219,7 +323,18 @@ def read_course_outcomes(course_code: str) -> dict:
         KeyError: if no outcomes found for course_code
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError("read_course_outcomes: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT outcomes FROM course_outcomes WHERE course_code = %s", (course_code,))
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] read_course_outcomes failed: {e}") from e
+    if not row:
+        raise KeyError(f"No course outcomes found for course_code: {course_code}")
+    return row[0] if isinstance(row[0], dict) else json.loads(row[0])
 
 
 def write_lecture_plan(lecture_plan: list[dict], course_code: str) -> str:
@@ -238,7 +353,23 @@ def write_lecture_plan(lecture_plan: list[dict], course_code: str) -> str:
         ConnectionError: if DB connection fails
         ValueError: if lecture_plan is empty
     """
-    raise NotImplementedError("write_lecture_plan: PostgreSQL not yet connected.")
+    if not lecture_plan:
+        raise ValueError("write_lecture_plan: lecture_plan must not be empty")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO lecture_plans (course_code, plan)
+            VALUES (%s, %s)
+            ON CONFLICT (course_code) DO UPDATE
+            SET plan = EXCLUDED.plan, created_at = NOW()
+        """, (course_code, json.dumps(lecture_plan)))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] write_lecture_plan failed: {e}") from e
+    return course_code
 
 
 # ---------------------------------------------------------------------------
@@ -260,7 +391,18 @@ def read_lecture_plan(course_code: str) -> list[dict]:
         KeyError: if no lecture plan found for course_code
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError("read_lecture_plan: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT plan FROM lecture_plans WHERE course_code = %s", (course_code,))
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] read_lecture_plan failed: {e}") from e
+    if not row:
+        raise KeyError(f"No lecture plan found for course_code: {course_code}")
+    return row[0] if isinstance(row[0], list) else json.loads(row[0])
 
 
 def write_ppt_content(
@@ -283,7 +425,21 @@ def write_ppt_content(
     Raises:
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError("write_ppt_content: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO ppt_content (course_code, lecture_number, content)
+            VALUES (%s, %s, %s)
+            ON CONFLICT (course_code, lecture_number) DO UPDATE
+            SET content = EXCLUDED.content, created_at = NOW()
+        """, (course_code, lecture_number, json.dumps(ppt_content)))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] write_ppt_content failed: {e}") from e
+    return f"{course_code}_lecture_{lecture_number}"
 
 
 # ---------------------------------------------------------------------------
@@ -306,7 +462,21 @@ def read_ppt_content(course_code: str, lecture_number: int) -> dict:
         KeyError: if no PPT content found for this course/lecture combination
         ConnectionError: if DB connection fails
     """
-    raise NotImplementedError("read_ppt_content: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT content FROM ppt_content WHERE course_code = %s AND lecture_number = %s",
+            (course_code, lecture_number)
+        )
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        raise ConnectionError(f"[postgresql_mcp] read_ppt_content failed: {e}") from e
+    if not row:
+        raise KeyError(f"No PPT content for {course_code} lecture {lecture_number}")
+    return row[0] if isinstance(row[0], dict) else json.loads(row[0])
 
 
 # ---------------------------------------------------------------------------
@@ -322,7 +492,19 @@ def log_phase_start(course_code: str, phase: str, run_id: str) -> None:
         phase: Phase name, e.g. "phase1", "phase2", "phase5a"
         run_id: Unique identifier for this pipeline run (UUID)
     """
-    raise NotImplementedError("log_phase_start: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO pipeline_runs (run_id, course_code, phase, status)
+            VALUES (%s, %s, %s, 'running')
+            ON CONFLICT (run_id) DO NOTHING
+        """, (run_id, course_code, phase))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print(f"[postgresql_mcp] log_phase_start warning: {e}")
 
 
 def log_phase_complete(run_id: str, status: str, metadata: Optional[dict] = None) -> None:
@@ -334,7 +516,19 @@ def log_phase_complete(run_id: str, status: str, metadata: Optional[dict] = None
         status: "completed" | "failed" | "force_passed"
         metadata: Optional dict of observability data (iteration_count, gap_count, etc.)
     """
-    raise NotImplementedError("log_phase_complete: PostgreSQL not yet connected.")
+    try:
+        conn = _get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            UPDATE pipeline_runs
+            SET status = %s, completed_at = NOW(), metadata = %s
+            WHERE run_id = %s
+        """, (status, json.dumps(metadata or {}), run_id))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print(f"[postgresql_mcp] log_phase_complete warning: {e}")
 
 
 # ---------------------------------------------------------------------------

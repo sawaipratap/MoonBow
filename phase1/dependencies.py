@@ -19,7 +19,8 @@ def get_db_writer() -> DBWriter:
         return MockDBWriter()
     from mcp.postgresql_mcp.server import write_syllabus, check_syllabus_exists
     class MCPDBWriterAdapter(DBWriter):
-        def write_syllabus(self, s, c, p, i): return write_syllabus(s.model_dump(), c, p, i)
+        def write_syllabus(self, syllabus, course_code, phase_status, iteration_count): 
+            return write_syllabus(syllabus.model_dump(), course_code, phase_status, iteration_count)
         def check_syllabus_exists(self, c): return check_syllabus_exists(c)
     return MCPDBWriterAdapter()
 

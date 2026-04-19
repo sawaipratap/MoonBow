@@ -1,47 +1,37 @@
 import argparse
 from phase2.graph import phase2_graph
-from phase2.dependencies import get_db_reader
 
 
 def run(course_code: str):
-    print(f"\nStarting Phase 2 Processing for course: {course_code}")
-    print("="*50)
+    print(f"\n{'='*50}")
+    print(f"Starting Phase 2 Evaluation for: {course_code}")
+    print(f"{'='*50}\n")
 
-    # Load the Phase 1 syllabus for this course
-    db_reader = get_db_reader()
-    try:
-        syllabus = db_reader.read_latest_syllabus(course_code)
-    except FileNotFoundError as e:
-        print(f"[ERROR] {e}")
-        return None
-
-    # Initialize Phase 2 state
-    initial_state = {
-        "syllabus_draft": syllabus,
-    }
-
-    # Run the Phase 2 graph
+    initial_state = {"course_code": course_code}
     final_state = phase2_graph.invoke(initial_state)
 
-    print("\n" + "="*50)
+    print(f"\n{'='*50}")
     print("PHASE 2 EXECUTION COMPLETE")
     print(f"Status: {final_state.get('phase_status', 'unknown')}")
-    if final_state.get("aggregated_feedback"):
-        print("\nFeedback for Phase 1 Expander:")
-        print(final_state["aggregated_feedback"])
-    print("="*50)
 
-    return final_state
+    if final_state.get("phase_status") == "passed":
+        print("✓ All evaluators passed. Refined syllabus written to DB.")
+    elif final_state.get("phase_status") == "returned_to_phase1":
+        print("✗ Evaluation failed. Feedback for Phase 1:")
+        print("-" * 40)
+        print(final_state.get("compiled_feedback", ""))
+    elif final_state.get("phase_error"):
+        print(f"✗ Error: {final_state['phase_error']}")
+
+    print(f"{'='*50}\n")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run Phase 2 Syllabus Refinement")
+    parser = argparse.ArgumentParser(description="Run Phase 2 Syllabus Evaluation")
     parser.add_argument(
         "course_code",
         type=str,
-        nargs="?",
-        default="AUTO",
-        help="Course code to process (used to find Phase 1 mock output). Defaults to latest."
+        help="Course code to evaluate (must have been processed by Phase 1 first)"
     )
     args = parser.parse_args()
     run(args.course_code)

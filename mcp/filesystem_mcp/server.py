@@ -26,7 +26,15 @@ Phases that use this server:
 """
 
 import os
+import io
 from typing import Optional
+
+try:
+    from minio import Minio
+    from minio.error import S3Error
+    _MINIO_AVAILABLE = True
+except ImportError:
+    _MINIO_AVAILABLE = False
 
 
 # ---------------------------------------------------------------------------
@@ -50,6 +58,32 @@ LOCAL_CURRICULUM_DIR: str = os.getenv("LOCAL_CURRICULUM_DIR", "")
 
 
 # ---------------------------------------------------------------------------
+# MinIO Client Singleton
+# ---------------------------------------------------------------------------
+
+_minio_client = None
+
+def _get_minio() -> "Minio":
+    """Returns a lazily-initialised MinIO client singleton."""
+    global _minio_client
+    if not _MINIO_AVAILABLE:
+        raise ImportError("minio package not installed. Run: pip install minio")
+    if _minio_client is None:
+        endpoint = MINIO_ENDPOINT
+        for prefix in ("http://", "https://"):
+            if endpoint.startswith(prefix):
+                endpoint = endpoint[len(prefix):]
+                break
+        _minio_client = Minio(
+            endpoint,
+            access_key=MINIO_ACCESS_KEY,
+            secret_key=MINIO_SECRET_KEY,
+            secure=MINIO_ENDPOINT.startswith("https")
+        )
+    return _minio_client
+
+
+# ---------------------------------------------------------------------------
 # Interface contract (mirrors interfaces/file_reader.py in phase1)
 # ---------------------------------------------------------------------------
 
@@ -69,10 +103,28 @@ def read_curriculum(file_path: str) -> str:
         ValueError: if the file format is not supported (only .md and .pdf)
         ConnectionError: if MinIO is unreachable
     """
-    raise NotImplementedError(
-        "read_curriculum: MinIO client not yet connected. "
-        "Use MockFileReader via dependencies.py in mock mode."
-    )
+    try:
+        client = _get_minio()
+        response = client.get_object(CURRICULUM_BUCKET, file_path)
+        raw_bytes = response.read()
+        response.close()
+        response.release_conn()
+    except S3Error as e:
+        if e.code == "NoSuchKey":
+            raise FileNotFoundError(f"Curriculum not found in MinIO: {CURRICULUM_BUCKET}/{file_path}") from e
+        raise ConnectionError(f"MinIO error reading curriculum: {e}") from e
+
+    ext = os.path.splitext(file_path)[1].lower()
+    if ext == ".md":
+        return raw_bytes.decode("utf-8")
+    elif ext == ".pdf":
+        try:
+            import pdfminer.high_level as pdfminer
+            return pdfminer.extract_text(io.BytesIO(raw_bytes))
+        except ImportError:
+            raise ImportError("pdfminer.six not installed. Run: pip install pdfminer.six")
+    else:
+        raise ValueError(f"Unsupported curriculum file format: {ext}. Only .md and .pdf are supported.")
 
 
 def read_skill(skill_name: str) -> str:
@@ -93,10 +145,17 @@ def read_skill(skill_name: str) -> str:
         FileNotFoundError: if the skill does not exist in the skills bucket
         ConnectionError: if MinIO is unreachable
     """
-    raise NotImplementedError(
-        "read_skill: MinIO client not yet connected. "
-        "Use MockSkillLoader via dependencies.py in mock mode."
-    )
+    try:
+        client = _get_minio()
+        response = client.get_object(SKILLS_BUCKET, skill_name)
+        content = response.read().decode("utf-8")
+        response.close()
+        response.release_conn()
+        return content
+    except S3Error as e:
+        if e.code == "NoSuchKey":
+            raise FileNotFoundError(f"Skill not found in MinIO: {SKILLS_BUCKET}/{skill_name}") from e
+        raise ConnectionError(f"MinIO error reading skill: {e}") from e
 
 
 def write_file(dest_path: str, content: bytes, content_type: str = "application/octet-stream") -> str:
@@ -123,10 +182,21 @@ def write_file(dest_path: str, content: bytes, content_type: str = "application/
         ConnectionError: if MinIO is unreachable
         ValueError: if content is empty
     """
-    raise NotImplementedError(
-        "write_file: MinIO client not yet connected. "
-        "Implement using minio-py client once MinIO is provisioned."
-    )
+    if not content:
+        raise ValueError("write_file: content must not be empty")
+    try:
+        client = _get_minio()
+        client.put_object(
+            OUTPUT_BUCKET,
+            dest_path,
+            io.BytesIO(content),
+            length=len(content),
+            content_type=content_type
+        )
+        endpoint = MINIO_ENDPOINT.rstrip("/")
+        return f"{endpoint}/{OUTPUT_BUCKET}/{dest_path}"
+    except S3Error as e:
+        raise ConnectionError(f"MinIO error writing file: {e}") from e
 
 
 def list_skills() -> list[str]:
@@ -140,10 +210,12 @@ def list_skills() -> list[str]:
     Raises:
         ConnectionError: if MinIO is unreachable
     """
-    raise NotImplementedError(
-        "list_skills: MinIO client not yet connected. "
-        "In mock mode, MockSkillLoader reads from LOCAL_SKILLS_DIR directly."
-    )
+    try:
+        client = _get_minio()
+        objects = client.list_objects(SKILLS_BUCKET)
+        return [obj.object_name for obj in objects]
+    except S3Error as e:
+        raise ConnectionError(f"MinIO error listing skills: {e}") from e
 
 
 # ---------------------------------------------------------------------------
