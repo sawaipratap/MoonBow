@@ -1,0 +1,1490 @@
+
+==================================================
+[2026-04-19T12:25:35.982171] NODE: curriculum_loader
+--------------------------------------------------
+<think>
+Let me extract the course metadata from the curriculum document:
+
+1. **course_name**: "Linear Algebra"
+2. **course_code**: "MATH2059"
+3. **course_level**: Looking at the context, this appears to be an undergraduate course (UG level) - typically MATH2xxx courses are undergraduate
+4. **credit_hours**: 3 (from the table showing C = 3)
+5. **domain**: "Mathematics"
+6. **institution**: Not explicitly mentioned in the document
+7. **semester**: Not explicitly mentioned
+8. **prerequisites**: ["Discrete Mathematics", "Advanced Engineering Mathematics 1 & 2"]
+
+Wait, I need to be careful about the exact format. Let me check:
+- The document doesn't specify the institution
+- The document doesn't specify which semester
+
+I should only include what's provided in the document. Let me re-read...
+
+Looking at the document again:
+- Institution: Not explicitly stated
+- Semester: Not explicitly stated
+
+So I should either:
+1. Leave these as empty strings or null
+2. Not include them at all
+
+The user asked for these exact fields, so I should include them but with empty/null values if not specified.
+
+Actually, looking more carefully at the prerequisites line:
+"Prerequisites: Discrete Mathematics, Advanced Engineering Mathematics 1 & 2"
+
+This could be parsed as:
+- "Discrete Mathematics"
+- "Advanced Engineering Mathematics 1 & 2" (which might mean two separate courses: Advanced Engineering Mathematics 1 and Advanced Engineering Mathematics 2)
+
+I think it's safer to keep "Advanced Engineering Mathematics 1 & 2" as one string since it's listed that way, or split it into two. Let me think... "1 & 2" suggests two separate courses. But since it's written as a single string, I'll keep it as one prerequisite entry for now.
+
+For course_level, there's no explicit indication. MATH2059 doesn't clearly indicate UG or PG. In many universities:
+
+
+- MATH1xxx = First year
+- MATH2xxx = Second year (typically UG)
+- MATH5xxx = postgraduate
+
+Without explicit information, I'll assume UG as it's a common level for such courses.
+
+I'll set the course level to undergraduate, recognizing the uncertainty. The MATH2xxx numbering suggests a second-year undergraduate course, which aligns with typical academic course structures. I'll include an empty string for the institution to maintain the required field structure while noting the lack of specific information.
+
+The prerequisites list confirms the undergraduate status, showing foundational mathematics courses typically taken in earlier university years. The empty strings for institution and semester reflect the missing details in the document.
+</think>
+
+```json
+{
+  "course_name": "Linear Algebra",
+  "course_code": "MATH2059",
+  "course_level": "UG",
+  "credit_hours": 3,
+  "domain": "Mathematics",
+  "institution": "",
+  "semester": "",
+  "prerequisites": ["Discrete Mathematics", "Advanced Engineering Mathematics 1 & 2"]
+}
+```
+==================================================
+
+==================================================
+[2026-04-19T12:26:52.829090] NODE: expander
+--------------------------------------------------
+<think>
+Let me analyze the course curriculum for Linear Algebra (MATH2059) and expand it into a detailed structured syllabus.
+
+Key details:
+- Course Name: Linear Algebra
+- Course Code: MATH2059
+- Level: UG (Undergraduate)
+- Credit Hours: 3
+- Domain: Mathematics
+- Prerequisites: Discrete Mathematics, Advanced Engineering Mathematics 1 & 2
+- Total Contact Hours: 45
+
+The curriculum has 6 units:
+1. Introduction to Linear Algebra (1 hour)
+2. System of Linear Equations (8 hours)
+3. Vector Spaces & Linear Transformation (12 hours)
+4. Eigenvalues & Eigenvectors (8 hours)
+5. Singular Value Decomposition (8 hours)
+6. Applications of Linear Algebra (8 hours)
+
+Total: 45 hours
+
+For an undergraduate course:
+- Depth should be conceptual understanding with practical application
+- Cover "what" and "how" thoroughly, introduce "why"
+- Avoid excessive theoretical abstraction
+- Worked examples are essential
+- 1-3 hours per subtopic
+
+Let me now structure the subtopics for each unit:
+
+**Unit I: Introduction to Linear Algebra (1 Hour)**
+This is a very short unit. Let me expand it:
+- Subtopic 1.1: Linearity vs Non-linearity (introductory, 0.3 hours)
+- Subtopic 1.2: Real-life examples of linear systems (introductory, 0.3 hours)
+- Subtopic 1.3: Overview of linear algebra and its scope (introductory, 0.2 hours)
+- Subtopic 1.4: Applications overview (introductory, 0.2 hours)
+
+**Unit II: System of Linear Equations (8 Hours)**
+- Subtopic 2.1: Vectors and linear combinations (intermediate, 1.5 hours)
+- Subtopic 2.2: Visualization of linear equations (introductory, 1 hour)
+
+
+- Subtopic 2.3: Matrix elimination and Gaussian elimination (intermediate, 2 hours)
+- Subtopic 2.4: Rank of matrix and its determination (intermediate, 1 hour)
+- Subtopic 2.5: Echelon and normal forms (intermediate, 1 hour)
+- Subtopic 2.6: Homogeneous and non-homogeneous systems (intermediate, 1 hour)
+- Subtopic 2.7: Applications (introductory, 0.5 hours)
+
+**Unit III: Vector Spaces & Linear Transformation (12 Hours)**
+- Subtopic 3.1: Vector spaces and subspaces (intermediate, 2 hours)
+- Subtopic 3.2: Basis and dimension (intermediate, 2 hours)
+- Subtopic 3.3: Linear transformations (intermediate, 2 hours)
+- Subtopic 3.4: Matrix representation of linear transformations (intermediate, 2 hours)
+- Subtopic 3.5: Change of basis (intermediate, 2 hours)
+- Subtopic 3.6: Applications and examples (introductory, 2 hours)
+
+**Unit IV: Eigenvalues & Eigenvectors (8 Hours)**
+- Subtopic 4.1: Eigenvalues and eigenvectors definition (intermediate, 1.5 hours)
+- Subtopic 4.2: Characteristic polynomial (intermediate, 1.5 hours)
+- Subtopic 4.3: Diagonalization (intermediate, 2 hours)
+- Subtopic 4.4: Applications (introductory, 3 hours)
+
+**Unit V: Singular Value Decomposition (8 Hours)**
+- Subtopic 5.1: SVD definition and properties (intermediate, 2 hours)
+- Subtopic 5.2: SVD computation (intermediate, 2 hours)
+- Subtopic 5.3: Applications in data science (introductory, 4 hours)
+
+**Unit VI: Applications of Linear Algebra (8 Hours)**
+- Subtopic 6.1: Machine learning applications (introductory, 2 hours)
+- Subtopic 6.2: Computer graphics applications (introductory, 2 hours)
+- Subtopic 6.3: Engineering applications (introductory, 2 hours)
+- Subtopic 6.4: Data science and statistics (introductory, 2 hours)
+
+The course uses three main textbooks covering both theoretical foundations and practical applications, supported by reference materials for deeper exploration and numerical methods. Assessment combines continuous evaluation through quizzes and tests with substantial project work to reinforce learning.
+</think>
+
+{
+  "course_metadata": {
+    "course_name": "Linear Algebra",
+    "course_code": "MATH2059",
+    "course_level": "UG",
+    "credit_hours": 3,
+    "domain": "Mathematics",
+    "institution": "",
+    "semester": "",
+    "prerequisites": ["Discrete Mathematics", "Advanced Engineering Mathematics 1", "Advanced Engineering Mathematics 2"]
+  },
+  "topics": [
+    {
+      "topic_name": "Introduction to Linear Algebra",
+      "unit_number": 1,
+      "learning_intent": "Students will understand the fundamental distinction between linear and non-linear systems, recognize real-world scenarios where linear algebra applies, and appreciate the breadth of applications in technology and science.",
+      "total_hours": 1.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Linearity vs Non-linearity",
+          "depth_level": "introductory",
+          "estimated_hours": 0.25,
+          "description": "Students will learn the definition of linearity, including the properties of additivity and homogeneity. The distinction between linear and non-linear relationships will be illustrated through simple examples such as proportional relationships versus quadratic or exponential functions.",
+          "prerequisites_within_course": []
+        },
+        {
+          "subtopic_name": "Real-life Examples of Linear Systems",
+          "depth_level": "introductory",
+          "estimated_hours": 0.25,
+          "description": "Introduction to everyday phenomena that can be modeled linearly, including mixing problems, electrical circuits with resistors in series, supply-demand平衡 in economics, and traffic flow models. These examples establish the practical relevance of studying linear algebra.",
+          "prerequisites_within_course": []
+        },
+        {
+          "subtopic_name": "Overview of Linear Algebra",
+          "depth_level": "introductory",
+          "estimated_hours": 0.25,
+          "description": "A broad survey of the major topics covered in the course: systems of linear equations, vector spaces, linear transformations, eigenvalues and eigenvectors, and singular value decomposition. The interconnected nature of these topics will be highlighted.",
+          "prerequisites_within_course": []
+        },
+        {
+          "subtopic_name": "Applications Overview: PageRank and Google Maps",
+          "depth_level": "introductory",
+          "estimated_hours": 0.25,
+          "description": "Introduction to two high-impact applications that use linear algebra: Google's PageRank algorithm (which uses eigenvalues and Markov matrices) and route optimization in Google Maps (which uses linear systems and graph theory). This motivates the importance of the course content.",
+          "prerequisites_within_course": []
+        }
+      ]
+    },
+    {
+      "topic_name": "System of Linear Equations",
+      "unit_number": 2,
+      "learning_intent": "Students will master the manipulation and solution of systems of linear equations using vector and matrix concepts, understand the geometric interpretation of solutions, and apply these techniques to practical problems in machine learning, cryptography, and digital imaging.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Vectors and Linear Combinations",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Students will learn the algebraic and geometric representations of vectors in ℝⁿ. Linear combinations will be defined as sums of scaled vectors, and the concept will be visualized in two and three dimensions. Spanning sets will be introduced through worked examples.",
+          "prerequisites_within_course": []
+        },
+        {
+          "subtopic_name": "Visualization of Linear Equations",
+          "depth_level": "introductory",
+          "estimated_hours": 1.0,
+          "description": "Geometric interpretation of linear equations in two and three variables as lines and planes respectively. Students will visualize the intersection of multiple equations as the solution to a system, understanding concepts like parallel lines and inconsistent systems.",
+          "prerequisites_within_course": ["Vectors and Linear Combinations"]
+        },
+        {
+          "subtopic_name": "Matrix Elimination and Gaussian Elimination",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.0,
+          "description": "Systematic method for solving linear systems using row operations on augmented matrices. Students will learn elementary row operations, row echelon form, reduced row echelon form, and back-substitution. Worked examples with 2×2, 3×3, and larger systems will be provided.",
+          "prerequisites_within_course": ["Visualization of Linear Equations"]
+        },
+        {
+          "subtopic_name": "Rank of a Matrix",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Definition of matrix rank as the maximum number of linearly independent rows or columns. Students will learn to compute rank using row reduction and understand the relationship between rank and the number of solutions in a linear system.",
+          "prerequisites_within_course": ["Matrix Elimination and Gaussian Elimination"]
+        },
+        {
+          "subtopic_name": "Echelon and Normal Forms",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Row echelon form and reduced row echelon form (RREF) will be distinguished. Students will learn the conditions for these forms and practice transforming matrices. The connection to solving systems efficiently will be emphasized.",
+          "prerequisites_within_course": ["Rank of a Matrix"]
+        },
+        {
+          "subtopic_name": "Homogeneous and Non-homogeneous Systems",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Distinction between homogeneous systems (all constants zero) and non-homogeneous systems. Students will learn that homogeneous systems always have at least the trivial solution and will determine conditions for non-trivial solutions based on the coefficient matrix rank.",
+          "prerequisites_within_course": ["Echelon and Normal Forms"]
+        },
+        {
+          "subtopic_name": "Applications: Machine Learning, Cryptography, and Color Models",
+          "depth_level": "introductory",
+          "estimated_hours": 0.5,
+          "description": "Practical applications including: linear regression as a system of normal equations, simple substitution ciphers and their matrix-based encryption, and RGB color representation as vectors for image processing.",
+          "prerequisites_within_course": ["Homogeneous and Non-homogeneous Systems"]
+        }
+      ]
+    },
+    {
+      "topic_name": "Vector Spaces and Linear Transformation",
+      "unit_number": 3,
+      "learning_intent": "Students will develop rigorous understanding of abstract vector spaces and linear transformations, including the ability to work with subspaces, bases, dimensions, and the rank-nullity theorem, with applications to data smoothing and image transformations.",
+      "total_hours": 12.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Vector Spaces and Subspaces",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Formal definition of a vector space over a field, with verification of all axioms. Students will learn about subspaces, including the zero subspace and span of a set. Conditions for a subset to be a subspace will be established through proofs and examples.",
+          "prerequisites_within_course": ["Vectors and Linear Combinations"]
+        },
+        {
+          "subtopic_name": "Linear Span",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "The span of a set of vectors will be defined as all possible linear combinations. Students will learn to determine whether a vector lies in the span of a given set and understand geometric interpretations of spans in ℝ² and ℝ³.",
+          "prerequisites_within_course": ["Vector Spaces and Subspaces"]
+        },
+        {
+          "subtopic_name": "Linear Independence and Dependence",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Definitions of linear independence and dependence using the zero vector representation. Students will learn to test independence using the definition and through row reduction. The relationship between independence and spanning will be explored.",
+          "prerequisites_within_course": ["Linear Span"]
+        },
+        {
+          "subtopic_name": "Basis and Dimension",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Definition of a basis as a linearly independent spanning set. Students will learn to find bases for common vector spaces including ℝⁿ, subspaces defined by homogeneous systems, and understand dimension as the number of vectors in a basis.",
+          "prerequisites_within_course": ["Linear Independence and Dependence"]
+        },
+        {
+          "subtopic_name": "Linear Mappings and Matrices",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Definition of linear transformations between vector spaces. Students will learn to verify linearity, understand the relationship between linear transformations and matrix multiplication, and find the matrix representation of a linear transformation.",
+          "prerequisites_within_course": ["Basis and Dimension"]
+        },
+        {
+          "subtopic_name": "Kernel, Image, and Null Space",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "The kernel (null space) and image of a linear transformation will be defined. Students will learn to compute these subspaces and understand their roles in characterizing linear transformations.",
+          "prerequisites_within_course": ["Linear Mappings and Matrices"]
+        },
+        {
+          "subtopic_name": "Rank-Nullity Theorem",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "The fundamental theorem connecting the dimensions of the kernel and image of a linear transformation. Students will learn the theorem statement, proof strategy, and applications to solving linear systems and understanding transformation properties.",
+          "prerequisites_within_course": ["Kernel, Image, and Null Space"]
+        },
+        {
+          "subtopic_name": "Singular and Non-singular Mappings",
+          "depth_level": "intermediate",
+          "estimated_hours": 0.75,
+          "description": "Distinction between singular (non-invertible) and non-singular (invertible) linear transformations. Students will learn to determine singularity using determinant properties and understand the geometric effects of singular transformations.",
+          "prerequisites_within_course": ["Rank-Nullity Theorem"]
+        },
+        {
+          "subtopic_name": "Isomorphisms and Matrix Similarity",
+          "depth_level": "intermediate",
+          "estimated_hours": 0.75,
+          "description": "Concept of isomorphic vector spaces having the same structure. Students will learn when two matrices are similar (representing the same transformation in different bases) and understand the significance of similarity for computational simplification.",
+          "prerequisites_within_course": ["Singular and Non-singular Mappings"]
+        },
+        {
+          "subtopic_name": "Change of Basis",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Techniques for converting coordinates between different bases. Students will learn transition matrices and understand when and why basis changes are useful for simplifying matrix computations.",
+          "prerequisites_within_course": ["Isomorphisms and Matrix Similarity"]
+        },
+        {
+          "subtopic_name": "Inner Product Spaces and Norms",
+          "depth_level": "intermediate",
+          "estimated_hours": 0.75,
+          "description": "Introduction to inner product spaces generalizing the dot product. Students will learn about norms as measures of vector length and angle, including Cauchy-Schwarz inequality and triangle inequality.",
+          "prerequisites_within_course": ["Change of Basis"]
+        },
+        {
+          "subtopic_name": "Orthogonality and Gram-Schmidt Process",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Orthogonal and orthonormal bases in inner product spaces. Students will learn the Gram-Schmidt orthogonalization process to convert any basis into an orthogonal basis, with applications to QR decomposition.",
+          "prerequisites_within_course": ["Inner Product Spaces and Norms"]
+        },
+        {
+          "subtopic_name": "Applications: Data Smoothing and Image Scaling",
+          "depth_level": "introductory",
+          "estimated_hours": 0.5,
+          "description": "Practical applications including using linear transformations for data denoising and the role of orthogonal projections in image scaling and transformation operations.",
+          "prerequisites_within_course": ["Orthogonality and Gram-Schmidt Process"]
+        }
+      ]
+    },
+    {
+      "topic_name": "Eigenvalues and Eigenvectors",
+      "unit_number": 4,
+      "learning_intent": "Students will master eigenvalue and eigenvector computation and interpretation, understand diagonalization and its applications to matrix powers and functions, and apply these concepts to quadratic forms, least squares approximation, and real-world applications like facial recognition and search engines.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Characteristic Polynomial",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "The characteristic polynomial will be derived as det(A - λI). Students will learn to compute characteristic polynomials for 2×2 and 3×3 matrices, understand the relationship between eigenvalues and roots of this polynomial, and learn about algebraic multiplicity.",
+          "prerequisites_within_course": ["Inner Product Spaces and Norms"]
+        },
+        {
+          "subtopic_name": "Cayley-Hamilton Theorem",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Statement and verification of the Cayley-Hamilton theorem (every matrix satisfies its own characteristic equation). Students will learn to use this theorem to compute matrix functions and inverses efficiently.",
+          "prerequisites_within_course": ["Characteristic Polynomial"]
+        },
+        {
+          "subtopic_name": "Eigenvalues and Eigenvectors",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Definition and computation of eigenvalues and eigenvectors for matrices. Students will learn to find eigenvectors corresponding to given eigenvalues and understand geometric multiplicity. Methods for 2×2 and 3×3 matrices will be emphasized with worked examples.",
+          "prerequisites_within_course": ["Cayley-Hamilton Theorem"]
+        },
+        {
+          "subtopic_name": "Geometric Interpretation",
+          "depth_level": "introductory",
+          "estimated_hours": 0.75,
+          "description": "Visual understanding of eigenvectors as directions unchanged by a linear transformation (scaled but not rotated) and eigenvalues as scaling factors. Applications to stretching, shearing, and rotation will be illustrated geometrically.",
+          "prerequisites_within_course": ["Eigenvalues and Eigenvectors"]
+        },
+        {
+
+==================================================
+
+==================================================
+[2026-04-19T12:27:16.064942] NODE: expander
+--------------------------------------------------
+<think>Let me analyze the course details and produce a complete syllabus expansion:
+
+**Course Metadata:**
+- Name: Linear Algebra
+- Code: MATH2059
+- Level: UG (Undergraduate)
+- Credit Hours: 3
+- Domain: Mathematics
+- Prerequisites: Discrete Mathematics, Advanced Engineering Mathematics 1 & 2
+
+**Total Hours:** 3 credits × 15 hours/credit = 45 hours (matches the curriculum)
+
+**Units from curriculum:**
+- Unit I: Introduction to Linear Algebra (1 Hour)
+- Unit II: System of Linear Equations (8 Hours)
+- Unit III: Vector Spaces & Linear Transformation (12 Hours)
+- Unit IV: Eigenvalues & Eigenvectors (8 Hours)
+- Unit V: Singular Value Decomposition (8 Hours)
+- Unit VI: Applications of Linear Algebra (8 Hours)
+
+Total: 1+8+12+8+8+8 = 45 hours ✓
+
+Now I need to expand each unit into subtopics with depth levels, descriptions, and intra-course prerequisites.
+
+**UG Level Guidelines:**
+- Depth: Conceptual understanding with practical application
+- "What" and "how" thoroughly. "Why" introduced but not at research depth
+- Avoid excessive theoretical abstraction
+- Subtopic hours: 1-3 hours per subtopic
+- Do not assume knowledge beyond prerequisites
+
+**Unit I - Introduction (1 hour):**
+This is a brief introductory unit. I should expand into 3-4 subtopics.
+
+**Unit II - System of Linear Equations (8 hours):**
+Subtopics from curriculum: vectors and linear combinations, visualization, matrix elimination, rank, echelon/normal forms, homogeneous/non-homogeneous systems, applications
+
+
+For the 8 hours available, I can structure these into 4-5 substantive subtopics covering the core techniques and their practical uses.
+
+**Unit III - Vector Spaces & Linear Transformation (12 hours):**
+Subtopics: vector spaces/subspaces, linear span, independence/dependence, basis/dimension, linear mappings, kernel/image/null space, rank-nullity theorem, singular/non-singular mappings, isomorphisms, similarity of matrices, change of basis, inner product spaces, norms, orthogonality, Gram-Schmidt process, applications
+
+This is quite dense for 12 hours. I'll organize these into logical groups: foundational concepts about vector spaces and independence, then linear transformations and their properties, and finally inner product spaces with orthogonality. Applications will tie these concepts together.
+
+**Unit IV - Eigenvalues & Eigenvectors (8 hours):**
+Covering characteristic polynomial, Cayley-Hamilton theorem, eigenvalues/eigenvectors, geometric interpretation, diagonalization, matrix powers and functions, symmetric matrices and quadratic forms, least squares method, with applications in facial recognition and feature extraction. This unit has significant content to work through in the available time.
+
+**Unit V - Singular Value Decomposition (8 hours):**
+Begin with spectral decomposition as prerequisite knowledge, then move into SVD definition, rank-k approximation techniques, and the power method for computation. Applications span PCA, data centering, document ranking, and clustering algorithms. Need to balance depth with breadth across these interconnected topics.
+
+**Unit VI - Applications (8 hours):**
+Focus on computational applications including traffic systems, circuit analysis, chemical equation balancing, and data compression using SVD. Additional topics include word embeddings, bias in data, Markov matrices for PageRank, game strategies, information retrieval, and chessboard moves.</think>
+
+{
+  "course_metadata": {
+    "course_name": "Linear Algebra",
+    "course_code": "MATH2059",
+    "course_level": "UG",
+    "credit_hours": 3,
+    "domain": "Mathematics",
+    "institution": "",
+    "semester": "",
+    "prerequisites": [
+      "Discrete Mathematics",
+      "Advanced Engineering Mathematics 1",
+      "Advanced Engineering Mathematics 2"
+    ]
+  },
+  "topics": [
+    {
+      "topic_name": "Introduction to Linear Algebra",
+      "unit_number": 1,
+      "learning_intent": "Students will be able to distinguish between linear and non-linear phenomena, articulate why linear algebra is a foundational tool in science and engineering, and recognize its applications in real-world systems like web search and navigation.",
+      "total_hours": 1.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Linearity and Non-linearity",
+          "depth_level": "introductory",
+          "estimated_hours": 0.3,
+          "description": "Definition of linearity: superposition and homogeneity properties. Examples of linear and non-linear systems. Why linear models are tractable and widely used despite most real phenomena being non-linear.",
+          "prerequisites_within_course": []
+        },
+        {
+          "subtopic_name": "Real-Life Examples of Linear Algebra",
+          "depth_level": "introductory",
+          "estimated_hours": 0.35,
+          "description": "Everyday applications: resource allocation, network flows, image processing. Brief motivation connecting abstract concepts to tangible problems students may encounter in engineering and data science.",
+          "prerequisites_within_course": [
+            "Linearity and Non-linearity"
+          ]
+        },
+        {
+          "subtopic_name": "Overview of Linear Algebra Concepts",
+          "depth_level": "introductory",
+          "estimated_hours": 0.35,
+          "description": "High-level survey of vectors, matrices, vector spaces, eigenvalues, and decompositions. Students will see the roadmap of the course and how topics interconnect.",
+          "prerequisites_within_course": [
+            "Real-Life Examples of Linear Algebra"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_name": "System of Linear Equations",
+      "unit_number": 2,
+      "learning_intent": "Students will be able to represent and solve systems of linear equations using vectors and matrices, interpret the geometric meaning of solutions, and compute matrix rank to determine solution behavior in homogeneous and non-homogeneous contexts.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Vectors and Linear Combinations",
+          "depth_level": "introductory",
+          "estimated_hours": 1.5,
+          "description": "Introduction to vectors in R^n: notation, addition, scalar multiplication. Linear combinations of vectors and their geometric interpretation as spanning lines and planes. Connection to system of equations as linear combinations.",
+          "prerequisites_within_course": [
+            "Overview of Linear Algebra Concepts"
+          ]
+        },
+        {
+          "subtopic_name": "Visualization of Linear Systems",
+          "depth_level": "introductory",
+          "estimated_hours": 1.0,
+          "description": "Graphical representation of 2-variable and 3-variable linear equations as lines and planes. Intersections representing solutions. Visualization of inconsistent, dependent, and unique solution cases.",
+          "prerequisites_within_course": [
+            "Vectors and Linear Combinations"
+          ]
+        },
+        {
+          "subtopic_name": "Matrix Elimination and Echelon Forms",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.5,
+          "description": "Gaussian elimination: forward elimination, back-substitution, row operations. Row echelon form and reduced row echelon form (RREF). Pivot positions and their significance. Row rank and column rank equivalence.",
+          "prerequisites_within_course": [
+            "Visualization of Linear Systems"
+          ]
+        },
+        {
+          "subtopic_name": "Rank and Solution Classification",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Rank of a matrix: definition and computation via row reduction. Relationship between rank, number of variables, and solution type. Homogeneous systems (always have trivial solution) vs. non-homogeneous systems. Free variables and parametric solutions.",
+          "prerequisites_within_course": [
+            "Matrix Elimination and Echelon Forms"
+          ]
+        },
+        {
+          "subtopic_name": "Applications of Linear Systems",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Practical applications: basic machine learning regression, simple substitution ciphers in cryptography, RGB color model representation as vector combinations. Worked examples for each application area.",
+          "prerequisites_within_course": [
+            "Rank and Solution Classification"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_name": "Vector Spaces and Linear Transformations",
+      "unit_number": 3,
+      "learning_intent": "Students will be able to verify vector space properties, determine linear independence and spanning sets, compute bases and dimensions, represent linear transformations with matrices, and apply the rank-nullity theorem to analyze transformation properties.",
+      "total_hours": 12.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Vector Spaces and Subspaces",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Axiomatic definition of vector spaces over R. Examples: R^n, polynomials, matrices, function spaces. Definition and characterization of subspaces. Testing whether a subset is a subspace.",
+          "prerequisites_within_course": [
+            "Vectors and Linear Combinations"
+          ]
+        },
+        {
+          "subtopic_name": "Linear Span, Independence, and Basis",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.5,
+          "description": "Span of a set of vectors. Linear independence and dependence: definition via homogeneous equation, geometric interpretation. Spanning sets. Basis: minimal spanning set, unique representation property. Dimension as cardinality of basis.",
+          "prerequisites_within_course": [
+            "Vector Spaces and Subspaces"
+          ]
+        },
+        {
+          "subtopic_name": "Linear Transformations and Matrices",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.0,
+          "description": "Definition of linear transformation T: V -> W. Properties: T(0)=0, linearity preserved. Kernel (null space) and image (range) of a transformation. Matrix representation of linear transformations relative to chosen bases.",
+          "prerequisites_within_course": [
+            "Linear Span, Independence, and Basis"
+          ]
+        },
+        {
+          "subtopic_name": "Rank-Nullity Theorem",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Statement and proof of the fundamental theorem: dim(Kernel) + dim(Image) = dim(Domain). Applications: comparing sizes of kernel and image, determining if a linear map is onto or one-to-one based on dimensions. Singular vs. non-singular (invertible) linear maps.",
+          "prerequisites_within_course": [
+            "Linear Transformations and Matrices"
+          ]
+        },
+        {
+          "subtopic_name": "Matrix Similarity and Change of Basis",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Similar matrices: definition, same linear transformation in different bases. Change of basis matrices, similarity transformation B = P^-1 AP. Diagonalization as special case of similarity. Invariance of trace, determinant, and eigenvalues under similarity.",
+          "prerequisites_within_course": [
+            "Rank-Nullity Theorem"
+          ]
+        },
+        {
+          "subtopic_name": "Inner Product Spaces and Orthogonality",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.0,
+          "description": "Inner product definition and properties. Norm and distance from inner product. Orthogonality: perpendicular vectors, orthogonal complement. Gram-Schmidt orthogonalization process for producing orthonormal bases from any basis.",
+          "prerequisites_within_course": [
+            "Matrix Similarity and Change of Basis"
+          ]
+        },
+        {
+          "subtopic_name": "Applications: Data Smoothing and Image Scaling",
+          "depth_level": "advanced",
+          "estimated_hours": 1.0,
+          "description": "Application of linear transformations and orthogonal projections in data smoothing. Image scaling using linear interpolation as matrix transformation. Worked example demonstrating how change of basis simplifies transformation analysis.",
+          "prerequisites_within_course": [
+            "Inner Product Spaces and Orthogonality"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_name": "Eigenvalues and Eigenvectors",
+      "unit_number": 4,
+      "learning_intent": "Students will be able to compute eigenvalues and eigenvectors, apply the Cayley-Hamilton theorem for matrix analysis, diagonalize matrices where possible, interpret symmetric matrices via orthogonal diagonalization, and apply these concepts in least squares approximation and practical applications.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Characteristic Polynomial and Cayley-Hamilton",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Characteristic equation det(A - λI) = 0. Finding eigenvalues as roots of characteristic polynomial. Cayley-Hamilton theorem: every matrix satisfies its own characteristic equation, application to computing powers of matrices and matrix polynomials.",
+          "prerequisites_within_course": [
+            "Matrix Similarity and Change of Basis"
+          ]
+        },
+        {
+          "subtopic_name": "Eigenvalues and Eigenvectors Computation",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Computing eigenvectors for each eigenvalue. Eigenspace definition. Multiplicity: algebraic vs. geometric. Verification that eigenvectors from different eigenvalues are linearly independent. Worked numerical examples.",
+          "prerequisites_within_course": [
+            "Characteristic Polynomial and Cayley-Hamilton"
+          ]
+        },
+        {
+          "subtopic_name": "Geometric Interpretation and Diagonalization",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Eigenvectors as directions unchanged by the linear transformation (scaling only). Geometric visualization in R^2 and R^3. Diagonalization conditions: n distinct eigenvalues or sufficient eigenvectors. Process of diagonalization: A = PDP^-1.",
+          "prerequisites_within_course": [
+            "Eigenvalues and Eigenvectors Computation"
+          ]
+        },
+        {
+          "subtopic_name": "Symmetric Matrices and Quadratic Forms",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Spectral theorem for symmetric matrices: real eigenvalues, orthogonal eigenvectors. Quadratic forms as x^T A x. Classification: positive definite, negative definite, indefinite. Change of variables to eliminate cross-terms using orthogonal matrices.",
+          "prerequisites_within_course": [
+            "Geometric Interpretation and Diagonalization"
+          ]
+        },
+        {
+          "subtopic_name": "Least Squares Method",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Overdetermined systems and the need for approximation. Normal equations (A^T A)x = A^T b. Geometric interpretation: orthogonal projection onto column space. Application to data fitting.",
+          "prerequisites_within_course": [
+            "Symmetric Matrices and Quadratic Forms"
+          ]
+        },
+        {
+          "subtopic_name": "Applications: Facial Recognition, Feature Extraction, and Search Engines",
+          "depth_level": "advanced",
+          "estimated_hours": 1.0,
+          "description": "Eigenfaces: using principal eigenvectors of face image covariance for recognition. Eigenvalue-based feature importance in machine learning. PageRank as eigenvector problem: dominant eigenvector of transition matrix. Brief worked examples for each application.",
+          "prerequisites_within_course": [
+            "Least Squares Method"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_name": "Singular Value Decomposition",
+      "unit_number": 5,
+      "learning_intent": "Students will be able to explain spectral decomposition for symmetric matrices, perform and interpret SVD, use rank-k approximation for data compression, apply the power method for dominant singular vectors, and connect SVD to PCA and information retrieval applications.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Spectral Decomposition",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Spectral decomposition for symmetric matrices: A = PDP^T where D is diagonal with real eigenvalues and P is orthogonal. Decomposition as sum of rank-1 projections onto eigenvectors. Relationship to eigenvalues and orthonormal basis.",
+          "prerequisites_within_course": [
+            "Symmetric Matrices and Quadratic Forms"
+          ]
+        },
+        {
+          "subtopic_name": "Singular Value Decomposition (SVD)",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.0,
+          "description": "SVD definition: A = UΣV^T where U and V are orthogonal matrices and Σ is diagonal with singular values. Relationship between singular values and eigenvalues of A^T A and AA^T. Full vs. reduced SVD. Geometric interpretation: transformation as rotation-scaling-rotation.",
+          "prerequisites_within_course": [
+            "Spectral Decomposition"
+          ]
+        },
+        {
+          "subtopic_name": "Rank-k Approximation and the Power Method",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.0,
+          "description": "Eckart-Young theorem: best rank-k approximation in Frobenius norm uses top-k singular vectors. Truncated SVD for compression. Power method for computing dominant singular vector iteratively. Convergence behavior and practical considerations.",
+          "prerequisites_within_course": [
+            "Singular Value Decomposition (SVD)"
+          ]
+        },
+        {
+          "subtopic_name": "Connection to Principal Component Analysis (PCA)",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "PCA as application of SVD to centered data matrix. Principal components as left singular vectors of centered data. Variance explained by each component. Steps: center data, compute SVD, project onto top k components. Worked example with small dataset.",
+          "prerequisites_within_course": [
+            "Rank-k Approximation and the Power Method"
+          ]
+        },
+        {
+          "subtopic_name": "Applications: Data Centering, Document Ranking, and Clustering",
+          "depth_level": "advanced",
+          "estimated_hours": 1.5,
+          "description": "SVD-based document-term matrix decomposition for latent semantic analysis. Term frequency-inverse document frequency (TF-IDF) matrices. Using top singular vectors for clustering via k-means initialization. Brief worked examples demonstrating each application.",
+          "prerequisites_within_course": [
+            "Connection to Principal Component Analysis (PCA)"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_name": "Applications of Linear Algebra",
+      "unit_number": 6,
+      "learning_intent": "Students will be able to formulate real-world problems in science, engineering, and data analytics as linear algebra problems, apply matrix methods to traffic flow, circuits, and Markov chains, and critically analyze issues like data compression, bias, and word embeddings.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Network Flows: Traffic Systems and Circuit Analysis",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Modeling traffic flow using systems of linear
+==================================================
+
+==================================================
+[2026-04-19T12:27:42.475097] NODE: expander
+--------------------------------------------------
+<think>The user is asking me to expand a linear algebra course curriculum into a detailed syllabus. I need to output ONLY valid JSON matching the specified schema. No preamble, no explanation, no markdown code fences.
+
+Let me carefully construct the syllabus expansion following all the rules:
+
+1. Course metadata:
+- Name: Linear Algebra
+- Code: MATH2059
+- Level: UG
+- Credit Hours: 3
+- Domain: Mathematics
+- Prerequisites: Discrete Mathematics, Advanced Engineering Mathematics 1 & 2
+
+2. Total hours: 45 hours (3 credits × 15 hours/credit), must be within 10% tolerance = 40.5 to 49.5 hours
+
+3. Depth must match UG level (introductory to intermediate, conceptual with practical application, "what" and "how" thoroughly, "why" introduced but not at research depth)
+
+4. Units from the curriculum:
+- Unit I: Introduction to Linear Algebra (1 Hour) - minimal coverage
+- Unit II: System of Linear Equations (8 Hours)
+- Unit III: Vector Spaces & Linear Transformation (12 Hours)
+- Unit IV: Eigenvalues & Eigenvectors (8 Hours)
+- Unit V: Singular Value Decomposition (8 Hours)
+- Unit VI: Applications of Linear Algebra (8 Hours)
+
+Total: 1+8+12+8+8+8 = 45 hours - perfect match
+
+5. Each unit needs 3-7 subtopics with:
+- subtopic_name
+- depth_level (introductory | intermediate | advanced)
+- estimated_hours
+- description
+- prerequisites_within_course (array of strings, must be logically ordered)
+
+6. Each unit needs:
+- unit_number
+- learning_intent
+- total_hours
+- subtopics array
+
+7. Top level needs:
+- course_metadata
+- topics array
+- total_hours
+- coverage_summary
+
+Let me construct each unit carefully:
+
+
+Unit I spans 1 hour with 4 subtopics: distinguishing linearity from non-linearity, examining real-world examples, understanding linear algebra's scope, and exploring Google PageRank as an application. Unit II covers 8 hours across 6 subtopics starting with vectors and linear combinations, moving through equation visualization and matrix elimination techniques, then exploring matrix rank and echelon forms. The remaining units follow similarly with their designated hour allocations and specified subtopics.
+
+Unit III requires 12 hours and 13 subtopics, which pushes beyond the recommended 3-7 range. I need to consolidate this into a more manageable set while preserving the core vector space concepts—subspaces, spanning sets, linear independence, basis and dimension, linear transformations, and the rank-nullity theorem. Kernel, image, and null space concepts should be grouped together as they relate to linear mappings, and matrix similarity with change of basis needs to be condensed.
+
+For the inner product spaces section, I can combine norms, orthogonality, and the Gram-Schmidt process since they build on each other logically. Applications in data smoothing and image scaling can serve as concrete examples of these abstract concepts.
+
+Unit IV with 8 hours and 10 subtopics also exceeds the target range, so I'll need to trim this as well.
+
+Eigenvalues and eigenvectors deserve separate treatment given their importance—they tie to the characteristic polynomial and the Cayley-Hamilton theorem, plus diagonalization and applications in facial recognition and search engines. Symmetric matrices and quadratic forms can be grouped together since they're related, and powers/functions of matrices can be woven into the diagonalization discussion. I'll keep the geometric interpretation alongside eigenvalues since students benefit from understanding the visual aspect.
+
+For Unit V, spectral decomposition provides foundational context before diving into SVD itself, which connects naturally to rank-k approximation and the power method. Applications like PCA, document ranking, and clustering demonstrate practical uses.
+
+Unit VI contains 11 applications with only 8 hours allocated, so I need to identify the most essential ones and find ways to group them efficiently.
+
+In circuit analysis, I can treat traffic systems and circuit analysis as related applications of linear algebra methods. Chemical equation balancing, data compression via SVD, and word embeddings represent different domains where these techniques apply—chemistry, data science, and natural language processing respectively.
+
+Markov matrices with PageRank, game strategies, and information retrieval form a cohesive cluster showing how linear algebra powers search and recommendation systems. Chessboard moves and genetics modeling can be grouped as specialized applications with limited scope.
+
+I need to ensure each subtopic has proper depth level (introductory, intermediate, or advanced), realistic estimated hours, clear descriptions, and logical prerequisites arranged before dependent topics. Checking the hour allocations across units to verify the total structure. Unit III spans 12 hours with foundational concepts in vector spaces, linear transformations, and inner product spaces with orthogonalization techniques. Unit IV (8 hours) covers eigenvalues, eigenvectors, diagonalization, and quadratic forms with least squares approximation. Unit V (8 hours) addresses matrix decomposition including spectral and singular value decompositions, rank approximation, and principal component analysis.
+
+Unit VI applies these concepts across diverse domains—network analysis through traffic and circuit systems, data transformation via compression and embeddings, information retrieval using Markov chains and search engines, plus specialized applications in game theory and biological systems. The total of 45 hours provides sufficient depth for an undergraduate course while remaining achievable within a single semester.</think>
+
+{"course_metadata":{"course_name":"Linear Algebra","course_code":"MATH2059","course_level":"UG","credit_hours":3,"domain":"Mathematics","institution":"","semester":"","prerequisites":["Discrete Mathematics","Advanced Engineering Mathematics 1 & 2"]},"topics":[{"topic_name":"Introduction to Linear Algebra","unit_number":1,"learning_intent":"Students will be able to distinguish between linear and non-linear relationships and recognize the scope and relevance of linear algebra in modern applications such as web search and navigation systems.","total_hours":1,"subtopics":[{"subtopic_name":"Linearity vs Non-linearity","depth_level":"introductory","estimated_hours":0.25,"description":"Understanding what makes a relationship linear versus non-linear; examining linear functions as those satisfying superposition and scaling properties.","prerequisites_within_course":[]},{"subtopic_name":"Real-life Examples of Linearity","depth_level":"introductory","estimated_hours":0.25,"description":"Identifying linear relationships in everyday contexts such as proportional costs, distance-speed-time relationships, and simple budgeting scenarios.","prerequisites_within_course":[]},{"subtopic_name":"Overview of Linear Algebra","depth_level":"introductory","estimated_hours":0.25,"description":"Survey of the major topics covered in the course including vectors, matrices, vector spaces, eigenvalues, and decompositions.","prerequisites_within_course":[]},{"subtopic_name":"Applications: Google PageRank and Google Maps","depth_level":"introductory","estimated_hours":0.25,"description":"Introduction to how linear algebra powers real-world technologies like web page ranking and route optimization without deep mathematical detail.","prerequisites_within_course":[]}]},{"topic_name":"System of Linear Equations","unit_number":2,"learning_intent":"Students will be able to represent, solve, and analyze systems of linear equations using vectors and matrices, understanding the geometric interpretation and practical applications in machine learning, cryptography, and color models.","total_hours":8,"subtopics":[{"subtopic_name":"Vectors and Linear Combinations","depth_level":"introductory","estimated_hours":1.5,"description":"Introduction to vectors as ordered tuples of numbers; understanding linear combinations of vectors as scalar multiples summed together; geometric interpretation of vectors in 2D and 3D space.","prerequisites_within_course":["Linearity vs Non-linearity","Real-life Examples of Linearity"]},{"subtopic_name":"Visualization of Equations","depth_level":"introductory","estimated_hours":1,"description":"Geometric representation of linear equations as lines and planes; visualizing solution sets as intersection points, lines, or planes; understanding consistency and inconsistency visually.","prerequisites_within_course":["Vectors and Linear Combinations"]},{"subtopic_name":"Matrix Elimination","depth_level":"intermediate","estimated_hours":1.5,"description":"Gaussian elimination and Gauss-Jordan elimination as systematic methods for solving linear systems; row operations and elementary matrices; forward elimination and back substitution.","prerequisites_within_course":["Visualization of Equations"]},{"subtopic_name":"Rank of a Matrix","depth_level":"intermediate","estimated_hours":1,"description":"Definition of matrix rank as the maximum number of linearly independent rows or columns; rank from echelon forms; relationship between rank and solution existence for linear systems.","prerequisites_within_course":["Matrix Elimination"]},{"subtopic_name":"Echelon and Normal Forms","depth_level":"intermediate","estimated_hours":1,"description":"Row echelon form, reduced row echelon form (RREF), and normal forms; steps to achieve echelon forms; identifying pivot positions and free variables.","prerequisites_within_course":["Rank of a Matrix"]},{"subtopic_name":"Homogeneous and Non-homogeneous Systems","depth_level":"intermediate","estimated_hours":1,"description":"Understanding homogeneous systems (Ax=0) versus non-homogeneous systems (Ax=b); trivial and non-trivial solutions; connection between rank, nullity, and solution space dimension.","prerequisites_within_course":["Echelon and Normal Forms"]},{"subtopic_name":"Applications: Machine Learning, Cryptography, and Color Models","depth_level":"intermediate","estimated_hours":1,"description":"Practical applications including linear regression models in machine learning, simple encryption/decryption using linear transformations, and RGB color representation as vector spaces.","prerequisites_within_course":["Homogeneous and Non-homogeneous Systems"]}]},{"topic_name":"Vector Spaces and Linear Transformations","unit_number":3,"learning_intent":"Students will be able to understand abstract vector spaces and their properties, perform linear transformations between spaces, and apply the rank-nullity theorem to analyze transformation characteristics.","total_hours":12,"subtopics":[{"subtopic_name":"Vector Spaces and Subspaces","depth_level":"intermediate","estimated_hours":1.5,"description":"Axiomatic definition of vector spaces over fields; common examples including R^n, function spaces, and polynomial spaces; definition and characterization of subspaces; testing for subspace validity.","prerequisites_within_course":["Vectors and Linear Combinations"]},{"subtopic_name":"Linear Span and Span Sets","depth_level":"intermediate","estimated_hours":1,"description":"Understanding the span of a set of vectors as the set of all linear combinations; spanning sets; determining whether a vector lies in the span of a given set; span as a subspace.","prerequisites_within_course":["Vector Spaces and Subspaces"]},{"subtopic_name":"Linear Independence and Dependence","depth_level":"intermediate","estimated_hours":2,"description":"Definition of linear independence and dependence; testing for independence using linear combinations equal to zero; spanning sets and minimal spanning sets; relationship with dimension.","prerequisites_within_course":["Linear Span and Span Sets"]},{"subtopic_name":"Basis and Dimension","depth_level":"intermediate","estimated_hours":2,"description":"Basis as a linearly independent spanning set; standard bases for R^n; coordinates of vectors relative to a basis; dimension as the number of vectors in any basis; dimension theorem for subspaces.","prerequisites_within_course":["Linear Independence and Dependence"]},{"subtopic_name":"Linear Mappings","depth_level":"intermediate","estimated_hours":1.5,"description":"Definition of linear transformations; matrix representations of linear maps; properties preserved by linear transformations; examples including rotations, projections, and reflections.","prerequisites_within_course":["Basis and Dimension"]},{"subtopic_name":"Kernel, Image, and Null Space","depth_level":"intermediate","estimated_hours":1.5,"description":"Kernel (null space) as the set of vectors mapping to zero; image (range) as the set of all outputs; nullity and rank of a transformation; solving systems using kernel concepts.","prerequisites_within_course":["Linear Mappings"]},{"subtopic_name":"Rank-Nullity Theorem","depth_level":"intermediate","estimated_hours":1,"description":"Statement and proof of the rank-nullity theorem (dimension of kernel plus dimension of image equals dimension of domain); applications to solving linear systems and understanding transformation properties.","prerequisites_within_course":["Kernel, Image, and Null Space"]},{"subtopic_name":"Matrix Similarity and Change of Basis","depth_level":"intermediate","estimated_hours":1.5,"description":"Similar matrices representing the same linear transformation under different bases; similarity transformation formulas; diagonalization as a change of basis to simplify matrix representation.","prerequisites_within_course":["Rank-Nullity Theorem"]},{"subtopic_name":"Inner Product Spaces","depth_level":"intermediate","estimated_hours":2,"description":"Definition and properties of inner products; Cauchy-Schwarz inequality; angle between vectors; orthogonality and orthonormal bases; extensions beyond Euclidean spaces.","prerequisites_within_course":["Basis and Dimension"]},{"subtopic_name":"Gram-Schmidt Orthogonalization Process","depth_level":"intermediate","estimated_hours":1.5,"description":"Orthogonalizing a set of vectors to produce an orthonormal basis; step-by-step orthogonal projection procedures; applications to least squares approximation and QR decomposition.","prerequisites_within_course":["Inner Product Spaces"]},{"subtopic_name":"Applications: Data Smoothing and Image Scaling","depth_level":"intermediate","estimated_hours":1,"description":"Using linear transformations for smoothing noisy data through projection; applying matrix operations and interpolation for image scaling and transformation in computer graphics.","prerequisites_within_course":["Gram-Schmidt Orthogonalization Process"]}]},{"topic_name":"Eigenvalues and Eigenvectors","unit_number":4,"learning_intent":"Students will be able to compute and interpret eigenvalues and eigenvectors, apply the Cayley-Hamilton theorem, diagonalize matrices, and use quadratic forms with the least squares method for practical applications in facial recognition and search engines.","total_hours":8,"subtopics":[{"subtopic_name":"Characteristic Polynomial and Cayley-Hamilton Theorem","depth_level":"intermediate","estimated_hours":1.5,"description":"Computing the characteristic polynomial from det(A-lambda I); finding eigenvalues as roots; statement and verification of the Cayley-Hamilton theorem that every matrix satisfies its own characteristic equation.","prerequisites_within_course":["Rank-Nullity Theorem","Matrix Similarity and Change of Basis"]},{"subtopic_name":"Eigenvalues and Eigenvectors","depth_level":"intermediate","estimated_hours":1.5,"description":"Definition and computation of eigenvectors and eigenvalues; eigenspaces as solution sets; algebraic versus geometric multiplicity; finding eigenvectors for given eigenvalues.","prerequisites_within_course":["Characteristic Polynomial and Cayley-Hamilton Theorem"]},{"subtopic_name":"Geometric Interpretation of Eigenvalues and Eigenvectors","depth_level":"introductory","estimated_hours":1,"description":"Visual understanding of eigenvectors as directions unchanged by the transformation; eigenvalues as scaling factors; transformation effects including stretching, compressing, and reflection along eigenvector directions.","prerequisites_within_course":["Eigenvalues and Eigenvectors"]},{"subtopic_name":"Matrix Diagonalization","depth_level":"intermediate","estimated_hours":1.5,"description":"Diagonalization conditions: sufficient linearly independent eigenvectors; procedure for diagonalization A = PDP^(-1); powers and functions of diagonalizable matrices; limitations when diagonalization is not possible.","prerequisites_within_course":["Geometric Interpretation of Eigenvalues and Eigenvectors"]},{"subtopic_name":"Symmetric Matrices and Quadratic Forms","depth_level":"intermediate","estimated_hours":1.5,"description":"Properties of symmetric matrices: real eigenvalues and orthogonal eigenvectors; spectral theorem for symmetric matrices; quadratic forms as x^T Ax; classification as positive definite, negative definite, or indefinite; change of variables to eliminate cross terms.","prerequisites_within_course":["Matrix Diagonalization","Inner Product Spaces"]},{"subtopic_name":"Least Squares Method","depth_level":"intermediate","estimated_hours":1.5,"description":"Solving overdetermined systems using the least squares approach; normal equations; orthogonal projection onto column space; applications to data fitting and linear regression.","prerequisites_within_course":["Symmetric Matrices and Quadratic Forms","Gram-Schmidt Orthogonalization Process"]},{"subtopic_name":"Applications: Facial Recognition, Feature Extraction, and Search Engines","depth_level":"intermediate","estimated_hours":1.5,"description":"Using eigenvalues for dimensionality reduction in face recognition systems; feature extraction in image processing; eigenvector-based ranking methods in search engine algorithms.","prerequisites_within_course":["Matrix Diagonalization","Least Squares Method"]}]},{"topic_name":"Singular Value Decomposition","unit_number":5,"learning_intent":"Students will be able to perform and apply singular value decomposition, understand spectral decomposition, use rank-k approximations, and apply the power method for applications including PCA and data clustering.","total_hours":8,"subtopics":[{"subtopic_name":"Spectral Decomposition","depth_level":"intermediate","estimated_hours":1,"description":"Spectral decomposition for symmetric matrices using orthogonal eigenvectors; expressing a symmetric matrix as a sum of rank-one projection matrices scaled by eigenvalues; understanding the decomposition in terms of matrix actions.","prerequisites_within_course":["Symmetric Matrices and Quadratic Forms"]},{"subtopic_name":"Singular Value Decomposition (SVD)","depth_level":"intermediate","estimated_hours":2.5,"description":"Full SVD: A = U Sigma V^T with orthogonal matrices U and V and diagonal matrix Sigma; singular values as square roots of eigenvalues of A^T A; relationship between singular vectors and eigenvectors; compact SVD for rank-r matrices.","prerequisites_within_course":["Spectral Decomposition"]},{"subtopic_name":"Rank-k Approximation and the Power Method","depth_level":"intermediate","estimated_hours":1.5,"description":"Truncated SVD for rank-k approximation using the k largest singular values; Eckart-Young theorem on optimal low-rank approximation; power iteration for finding dominant singular vectors; convergence behavior of the power method.","prerequisites_within_course":["Singular Value Decomposition (SVD)"]},{"subtopic_name":"Principal Component Analysis (PCA)","depth_level":"intermediate","estimated_hours":2,"description":"PCA as an application of SVD for dimensionality reduction; centering data and computing covariance matrices; projecting onto principal components; choosing the number of components to retain based on explained variance.","prerequisites_within_course":["Rank-k Approximation and the Power Method"]},{"subtopic_name":"Applications: Data Centering, Document Ranking, and Clustering","depth_level":"intermediate","estimated_hours":1,"description":"Using SVD for data centering and normalization in preprocessing; applying SVD-based methods to document-term matrices for ranking and retrieval; clustering using low-dimensional SVD representations.","prerequisites_within_course":["Principal Component Analysis (PCA)"]}]},{"topic_name":"Applications of Linear Algebra","unit_number":6,"learning_intent":"Students will be able to apply linear algebra concepts to diverse real-world problems including network analysis, data compression, information retrieval, game theory, and biological modeling.","total_hours":8,"subtopics":[{"subtopic_name":"Traffic Systems and Circuit Analysis","depth_level":"intermediate","estimated_hours":1.5,"description":"Modeling traffic flow using systems of linear equations; Kirchhoff's voltage and current laws for circuit analysis; solving for currents and voltages in resistor networks using linear algebra.","prerequisites_within_course":["System of Linear Equations"]},{"subtopic_name":"Chemical Equation Balancing and Data Compression","depth_level":"intermediate","estimated_hours":1.5,"description":"Balancing chemical equations through solving linear systems representing elemental conservation; image compression using SVD truncation and rank-k approximations; compression ratio and reconstruction error analysis.","prerequisites_within_course":["Singular Value Decomposition (
+==================================================
+
+==================================================
+[2026-04-19T12:30:53.840674] NODE: curriculum_loader
+--------------------------------------------------
+<think>
+Let me extract the course metadata from the curriculum document:
+
+1. **course_name**: "Linear Algebra" (from the title and table)
+2. **course_code**: "MATH2059" (from the table)
+3. **course_level**: The document doesn't explicitly state UG, PG, or PhD. However, looking at the course code and the context (it appears to be a standard engineering/math course), I need to infer. The code "MATH2059" suggests an intermediate level course, typically UG. There's no clear indication of PG or PhD level, so I'll assume UG.
+4. **credit_hours**: 3 (from the table where C=3)
+5. **domain**: "Mathematics" or "Linear Algebra" - The domain should be a broader category. Looking at the course, it's a mathematics course. I'll use "Mathematics" as the domain.
+6. **institution**: Not explicitly mentioned in the document. I should look for any indication. There's no institution name visible in the provided text. I might need to leave this as empty or infer. Wait, let me re-read... No institution is mentioned. I should probably leave it as an empty string or indicate it's not provided.
+7. **semester**: Not explicitly mentioned in the document. The document doesn't specify which semester this course is offered in.
+8. **prerequisites**: "Discrete Mathematics, Advanced Engineering Mathematics 1 & 2" (from the Prerequisites line)
+
+Let me reconsider:
+- course_level: The document doesn't explicitly state the level. However, given the course code format and the fact that it has prerequisites and is a standard course, it could be either UG or PG. Without explicit information, I should note this. But the instructions say to return only valid JSON with these exact fields. If I'm unsure, I might need to make a reasonable inference or leave it empty. Looking at the structure, it seems like a typical undergraduate course (UG).
+
+Actually, looking more carefully at the document structure and content (like the CO-PO mapping which is common in engineering curricula), this is likely an undergraduate course.
+
+
+I'll proceed with creating the JSON, using "Unknown" for missing institution and semester, and assuming UG for the course level. I'll use "Mathematics" as the domain, which seems most appropriate given the course content.
+
+The code MATH2059 confirms my initial assessment of an undergraduate-level mathematics course. This validates my previous reasoning about the course's academic standing.
+</think>
+
+```json
+{
+  "course_name": "Linear Algebra",
+  "course_code": "MATH2059",
+  "course_level": "UG",
+  "credit_hours": 3,
+  "domain": "Mathematics",
+  "institution": "",
+  "semester": "",
+  "prerequisites": ["Discrete Mathematics", "Advanced Engineering Mathematics 1 & 2"]
+}
+```
+==================================================
+
+==================================================
+[2026-04-19T12:32:41.315400] NODE: curriculum_loader
+--------------------------------------------------
+<think>
+Let me extract the course metadata from the curriculum document:
+
+1. **course_name**: "Linear Algebra" (from the title and table)
+2. **course_code**: "MATH2059" (from the table)
+3. **course_level**: The document doesn't explicitly state UG, PG, or PhD. Looking at the content, this appears to be an undergraduate course (basic linear algebra typically offered at UG level, and the course code doesn't indicate a higher level). I'll infer it's "UG".
+4. **credit_hours**: 3 (from the table where C = 3)
+5. **domain**: This isn't explicitly stated, but from the context (Linear Algebra course with applications in machine learning, data analytics, etc.), the domain would be "Mathematics" or "Mathematics and Statistics"
+6. **institution**: Not explicitly mentioned in the document. I cannot infer this.
+7. **semester**: Not explicitly mentioned in the document. I cannot infer this.
+8. **prerequisites**: "Discrete Mathematics, Advanced Engineering Mathematics 1 & 2" (from the prerequisites line)
+
+Wait, let me reconsider:
+- For institution: Not provided in the document
+- For semester: Not provided in the document
+
+I should only extract what's available. Let me check again... The document doesn't mention the institution or semester. I should either leave these as empty strings or indicate they're not provided.
+
+Let me also reconsider the domain. Looking at the course code and content, it's a math course. The domain could be "Mathematics" or more specifically "Applied Mathematics".
+
+Let me provide the JSON with the extracted information, using empty strings for fields that are not provided.
+</think>
+
+```json
+{
+  "course_name": "Linear Algebra",
+  "course_code": "MATH2059",
+  "course_level": "UG",
+  "credit_hours": 3,
+  "domain": "Mathematics",
+  "institution": "",
+  "semester": "",
+  "prerequisites": ["Discrete Mathematics", "Advanced Engineering Mathematics 1 & 2"]
+}
+```
+==================================================
+
+==================================================
+[2026-04-19T12:34:34.853914] NODE: expander
+--------------------------------------------------
+<think>
+Let me analyze the curriculum and create a detailed structured syllabus based on the provided information.
+
+**Course Metadata:**
+- Name: Linear Algebra
+- Code: MATH2059
+- Level: UG
+- Credit Hours: 3
+- Domain: Mathematics
+- Prerequisites: Discrete Mathematics, Advanced Engineering Mathematics 1 & 2
+
+**Total Hours:** 3 credits × 15 hours/credit = 45 hours (matches the stated 45 contact hours)
+
+**Unit Breakdown from Curriculum:**
+1. Unit I: Introduction to Linear Algebra (1 Hour)
+2. Unit II: System of Linear Equations (8 Hours)
+3. Unit III: Vector Spaces & Linear Transformation (12 Hours)
+4. Unit IV: Eigenvalues & Eigenvectors (8 Hours)
+5. Unit V: Singular Value Decomposition (8 Hours)
+6. Unit VI: Applications of Linear Algebra (8 Hours)
+
+Total: 1 + 8 + 12 + 8 + 8 + 8 = 45 hours ✓
+
+Now I need to expand each unit with:
+- Subtopics (3-7 per unit)
+- Learning intent for each unit
+- For each subtopic: name, depth level, estimated hours, description, intra-course prerequisites
+
+Let me work through each unit:
+
+**Unit I: Introduction to Linear Algebra (1 Hour)**
+This is a brief intro unit. Given the 1 hour allocation, I should have about 2-3 subtopics.
+- Subtopic 1: Concept of Linearity (0.4 hours) - introductive
+- Subtopic 2: Real-life Examples and Applications Overview (0.3 hours) - introductive
+- Subtopic 3: Scope of Linear Algebra (0.3 hours) - introductive
+
+**Unit II: System of Linear Equations (8 Hours)**
+This has substantial content. I'll break it down:
+
+
+- Subtopic 1: Vectors and Linear Combinations (1.5 hours) - intermediate
+- Subtopic 2: Geometric Visualization of Linear Systems (1 hour) - introductory to intermediate
+- Subtopic 3: Gaussian Elimination and Row Reduction (2 hours) - intermediate
+- Subtopic 4: Matrix Rank and Echelon Forms (1.5 hours) - intermediate
+- Subtopic 5: Homogeneous and Non-homogeneous Solutions (1.5 hours) - intermediate
+- Subtopic 6: Practical Applications (0.5 hours) - introductory
+
+**Unit III: Vector Spaces & Linear Transformation (12 Hours)**
+This is the most extensive unit and requires careful structuring to build foundational understanding before advancing to more complex transformations. I'll organize it in stages: first establishing core concepts like vector spaces and subspaces, then moving to linear combinations and span, followed by independence and basis considerations, and finally connecting these to linear transformations and their properties.
+
+The remaining units cover eigenvalues and eigenvectors with an emphasis on computational methods, singular value decomposition and its applications, and concrete applications in traffic systems, circuit analysis, and data compression. Throughout all units, I need to maintain consistent depth appropriate for undergraduate students, ensure intra-course dependencies are logically sequenced, and keep each subtopic within the 1-3 hour range typical for this level.
+</think>
+
+{"course_metadata":{"course_name":"Linear Algebra","course_code":"MATH2059","course_level":"UG","credit_hours":3,"domain":"Mathematics","institution":"","semester":"","prerequisites":["Discrete Mathematics","Advanced Engineering Mathematics 1","Advanced Engineering Mathematics 2"]},"topics":[{"topic_name":"Introduction to Linear Algebra","unit_number":1,"learning_intent":"Students will understand the fundamental distinction between linear and non-linear systems, recognize the scope of linear algebra as a discipline, and identify real-world applications where linear algebraic methods are essential tools.","total_hours":1.0,"subtopics":[{"subtopic_name":"Linearity versus Non-linearity","depth_level":"introductory","estimated_hours":0.4,"description":"Definition of linearity through the superposition principle (additivity and homogeneity). Examination of common non-linear phenomena in nature and engineering that linear algebra approximates. Introduction to the concept of linear systems as idealized models with tractable solutions.","prerequisites_within_course":[]},{"subtopic_name":"Real-life Examples and Applications Overview","depth_level":"introductory","estimated_hours":0.3,"description":"Survey of application domains including Google PageRank algorithm, Google Maps navigation, computer graphics, machine learning, and data science. Students will see how linear algebra provides the mathematical backbone for these technologies.","prerequisites_within_course":["Linearity versus Non-linearity"]},{"subtopic_name":"Scope and Organization of the Course","depth_level":"introductory","estimated_hours":0.3,"description":"Roadmap of the syllabus covering systems of equations, vector spaces, eigenvalues, singular value decomposition, and applications. Discussion of how these topics interconnect and build upon each other throughout the semester.","prerequisites_within_course":[]}]},{"topic_name":"System of Linear Equations","unit_number":2,"learning_intent":"Students will develop proficiency in representing and solving systems of linear equations using vector and matrix notation, understand the concepts of linear combinations and matrix rank, and apply these techniques to practical problems in machine learning, cryptography, and digital imaging.","total_hours":8.0,"subtopics":[{"subtopic_name":"Vectors and Linear Combinations","depth_level":"introductory","estimated_hours":1.5,"description":"Introduction to vectors in R^n including component representation, vector addition, and scalar multiplication. Definition of linear combinations as sums of scaled vectors. Geometric interpretation of vectors in two and three dimensions as arrows and points. Applications to mixing problems and resource allocation.","prerequisites_within_course":["Linearity versus Non-linearity"]},{"subtopic_name":"Geometric Visualization of Linear Systems","depth_level":"introductory","estimated_hours":1.0,"description":"Graphical representation of two and three variable linear equations as lines and planes. Interpretation of solution sets as intersections. Classification of systems as having unique solutions, infinitely many solutions, or no solution based on geometric configuration.","prerequisites_within_course":["Vectors and Linear Combinations"]},{"subtopic_name":"Gaussian Elimination and Row Reduction","depth_level":"intermediate","estimated_hours":2.0,"description":"Systematic procedure for solving linear systems using elementary row operations. Introduction to augmented matrices and row echelon form. Back-substitution method for obtaining solutions. Treatment of special cases including inconsistent systems and free variables.","prerequisites_within_course":["Geometric Visualization of Linear Systems"]},{"subtopic_name":"Matrix Rank and Echelon Forms","depth_level":"intermediate","estimated_hours":1.5,"description":"Definition of matrix rank as the number of non-zero rows in row echelon form. Relationship between rank and number of pivots. Row reduced echelon form (RREF) and its uniqueness property. Rank-nullity relationship for homogeneous systems.","prerequisites_within_course":["Gaussian Elimination and Row Reduction"]},{"subtopic_name":"Homogeneous and Non-homogeneous Systems","depth_level":"intermediate","estimated_hours":1.5,"description":"Complete characterization of solution sets for homogeneous systems including the trivial solution and parametric representation of infinite solutions. Non-homogeneous systems using particular solutions and homogeneous solutions. Connection to vector spaces and null spaces.","prerequisites_within_course":["Matrix Rank and Echelon Forms"]},{"subtopic_name":"Applications to Machine Learning, Cryptography, and Color Models","depth_level":"introductory","estimated_hours":0.5,"description":"Practical applications including linear regression formulation as a linear system, Hill cipher encryption using matrix operations, and RGB color model representation as vectors. Worked examples demonstrating real-world relevance of solution techniques.","prerequisites_within_course":["Homogeneous and Non-homogeneous Systems"]}]},{"topic_name":"Vector Spaces and Linear Transformations","unit_number":3,"learning_intent":"Students will master the abstract framework of vector spaces, understand linear transformations as structure-preserving mappings, apply the rank-nullity theorem, perform change of basis computations, and utilize inner product spaces with orthogonal projection techniques.","total_hours":12.0,"subtopics":[{"subtopic_name":"Vector Spaces and Subspaces","depth_level":"intermediate","estimated_hours":1.5,"description":"Axiomatic definition of vector spaces over real and complex fields. Examples including R^n, polynomial spaces, and function spaces. Definition and characterization of subspaces as subsets closed under addition and scalar multiplication. Testing for subspace properties.","prerequisites_within_course":["Vectors and Linear Combinations"]},{"subtopic_name":"Linear Span and Independence","depth_level":"intermediate","estimated_hours":2.0,"description":"Definition of the span of a set of vectors as all linear combinations. Spanning sets and their geometric interpretation. Linear independence as minimal generating sets. Theorems relating independence, spanning, and basis. Wronskian determinant for function independence.","prerequisites_within_course":["Vector Spaces and Subspaces"]},{"subtopic_name":"Basis and Dimension","depth_level":"intermediate","estimated_hours":1.5,"description":"Definition of basis as linearly independent spanning sets. Dimension theorem for finite-dimensional spaces. Standard bases for R^n and polynomial spaces. Coordinates of vectors relative to a basis. Extension of independent sets to bases.","prerequisites_within_course":["Linear Span and Independence"]},{"subtopic_name":"Linear Mappings, Kernel, and Image","depth_level":"intermediate","estimated_hours":2.0,"description":"Definition of linear transformations between vector spaces. Kernel (null space) as the set of vectors mapping to zero. Image (range) as the set of output values. Properties including injectivity, surjectivity, and the relationship to matrix representation.","prerequisites_within_course":["Basis and Dimension"]},{"subtopic_name":"Rank-Nullity Theorem","depth_level":"intermediate","estimated_hours":1.5,"description":"Fundamental theorem relating dimensions of kernel and image for linear transformations. Proof using basis extension arguments. Applications to solving linear systems and understanding matrix properties. Connection to matrix rank.","prerequisites_within_course":["Linear Mappings, Kernel, and Image"]},{"subtopic_name":"Matrix Representation, Similarity, and Change of Basis","depth_level":"intermediate","estimated_hours":2.0,"description":"Matrix representation of linear transformations relative to chosen bases. Change of basis formula for matrices. Similar matrices representing the same transformation in different bases. Diagonalization concept preview.","prerequisites_within_course":["Rank-Nullity Theorem"]},{"subtopic_name":"Inner Product Spaces, Norms, and Orthogonality","depth_level":"intermediate","estimated_hours":1.5,"description":"Definition of inner product spaces extending Euclidean geometry to abstract spaces. Norm induced by inner product. Orthogonality and perpendicularity in general inner product spaces. Cauchy-Schwarz and triangle inequalities.","prerequisites_within_course":["Matrix Representation, Similarity, and Change of Basis"]},{"topic_name":"Gram-Schmidt Process and Applications","unit_number":3,"subtopics":[{"subtopic_name":"Gram-Schmidt Orthogonalization","depth_level":"intermediate","estimated_hours":1.5,"description":"Systematic procedure for constructing orthogonal bases from arbitrary bases. Modified Gram-Schmidt for numerical stability. QR decomposition as a matrix formulation. Applications to least squares problems.","prerequisites_within_course":["Inner Product Spaces, Norms, and Orthogonality"]},{"subtopic_name":"Applications to Data Smoothing and Image Scaling","depth_level":"introductory","estimated_hours":0.5,"description":"Practical applications including polynomial fitting for data smoothing using orthogonal projections and bilinear interpolation in image processing using linear transformations. Worked examples connecting theory to implementation.","prerequisites_within_course":["Gram-Schmidt Orthogonalization"]}],"learning_intent":"Students will master the abstract framework of vector spaces, understand linear transformations as structure-preserving mappings, apply the rank-nullity theorem, perform change of basis computations, and utilize inner product spaces with orthogonal projection techniques.","total_hours":12.0},{"topic_name":"Eigenvalues and Eigenvectors","unit_number":4,"learning_intent":"Students will compute and interpret eigenvalues and eigenvectors for various matrix types, apply the Cayley-Hamilton theorem and diagonalization procedures, analyze symmetric matrices and quadratic forms, and utilize these concepts in least squares approximation and applications like facial recognition and search engines.","total_hours":8.0,"subtopics":[{"subtopic_name":"Characteristic Polynomial and Cayley-Hamilton Theorem","depth_level":"intermediate","estimated_hours":1.5,"description":"Definition of characteristic polynomial as det(A - λI). Computation of eigenvalues as roots of the characteristic polynomial. Cayley-Hamilton theorem stating every matrix satisfies its characteristic equation. Applications to computing matrix polynomials.","prerequisites_within_course":["Matrix Rank and Echelon Forms","Linear Mappings, Kernel, and Image"]},{"subtopic_name":"Eigenvalues and Eigenvectors: Computation","depth_level":"intermediate","estimated_hours":1.5,"description":"Procedures for finding eigenvalues and eigenvectors for small matrices. Eigenspace definition as the nullspace of (A - λI). Geometric multiplicity versus algebraic multiplicity. Worked examples with 2x2 and 3x3 matrices.","prerequisites_within_course":["Characteristic Polynomial and Cayley-Hamilton Theorem"]},{"subtopic_name":"Geometric Interpretation","depth_level":"introductory","estimated_hours":1.0,"description":"Visual interpretation of eigenvectors as directions unchanged by linear transformations. Eigenvalue sign indicating direction preservation or reversal. Scaling factors as eigenvalues. Applications to Markov chains and population modeling.","prerequisites_within_course":["Eigenvalues and Eigenvectors: Computation"]},{"subtopic_name":"Diagonalization and Matrix Functions","depth_level":"intermediate","estimated_hours":1.5,"description":"Conditions for diagonalizability (complete sets of eigenvectors). Procedure for diagonalization: A = PDP^(-1). Computing powers of matrices using diagonalization. Functions of matrices including exponentials for differential equations.","prerequisites_within_course":["Geometric Interpretation"]},{"subtopic_name":"Symmetric Matrices and Quadratic Forms","depth_level":"intermediate","estimated_hours":1.5,"description":"Special properties of symmetric matrices: real eigenvalues and orthogonal eigenvectors. Spectral theorem statement. Quadratic forms as x^T A x. Classification as positive definite, negative definite, or indefinite. Optimization connections.","prerequisites_within_course":["Diagonalization and Matrix Functions"]},{"subtopic_name":"Least Squares Method","depth_level":"intermediate","estimated_hours":1.0,"description":"Normal equations for best approximation in overdetermined systems. Geometric interpretation using orthogonal projection. Solution using pseudoinverse and SVD connection. Applications to data fitting.","prerequisites_within_course":["Symmetric Matrices and Quadratic Forms"]},{"subtopic_name":"Applications: Facial Recognition, Feature Extraction, and Search Engines","depth_level":"introductory","estimated_hours":0.5,"description":"Practical applications including eigenfaces for facial recognition using PCA, feature extraction in pattern recognition, and PageRank using eigenvector centrality. Connection between theoretical concepts and implementation.","prerequisites_within_course":["Least Squares Method"]}]},{"topic_name":"Singular Value Decomposition","unit_number":5,"learning_intent":"Students will understand SVD as a generalization of eigenvalue decomposition for rectangular matrices, perform rank-k approximations, apply the power method for dominant singular vectors, and utilize SVD in principal component analysis, document ranking, and clustering algorithms.","total_hours":8.0,"subtopics":[{"subtopic_name":"Spectral Decomposition Review","depth_level":"intermediate","estimated_hours":1.0,"description":"Review of eigendecomposition for symmetric matrices. Spectral theorem for symmetric matrices with orthogonal diagonalization. Limitations when matrices are non-square or non-symmetric. Motivation for SVD generalization.","prerequisites_within_course":["Symmetric Matrices and Quadratic Forms"]},{"subtopic_name":"Singular Value Decomposition: Theory","depth_level":"intermediate","estimated_hours":2.0,"description":"Definition of singular values and singular vectors. SVD decomposition A = UΣV^T. Relationship between singular vectors and eigenvectors of A^T A and AA^T. Geometric interpretation as sequential orthogonal transformations and scaling.","prerequisites_within_course":["Spectral Decomposition Review"]},{"subtopic_name":"Rank-k Approximation and the Power Method","depth_level":"intermediate","estimated_hours":2.0,"description":"Low-rank approximation theorem: optimal k-rank approximation minimizes Frobenius norm. Eckart-Young theorem. Power method for computing dominant singular vectors. Iterative refinement and convergence analysis.","prerequisites_within_course":["Singular Value Decomposition: Theory"]},{"subtopic_name":"Principal Component Analysis","depth_level":"intermediate","estimated_hours":1.5,"description":"PCA as an application of SVD to centered data matrices. Variance maximization interpretation. Dimensionality reduction procedure. Selection of principal components using explained variance. Applications to data compression and visualization.","prerequisites_within_course":["Rank-k Approximation and the Power Method"]},{"subtopic_name":"Document Ranking and Clustering with SVD","depth_level":"introductory","estimated_hours":1.5,"description":"Latent Semantic Analysis for document retrieval using term-document matrices. SVD-based clustering through k-means on principal components. Applications in search engines, recommendation systems, and text mining.","prerequisites_within_course":["Principal Component Analysis"]},{"subtopic_name":"SVD in Data Centering and Preprocessing","depth_level":"introductory","estimated_hours":1.0,"description":"Role of SVD in data preprocessing pipelines. Mean centering using matrix operations. Whitening transformations. Connections to covariance matrices and correlation structures in multivariate statistics.","prerequisites_within_course":["Document Ranking and Clustering with SVD"]}]},{"topic_name":"Applications of Linear Algebra","unit_number":6,"learning_intent":"Students will solve applied problems across diverse domains including traffic flow analysis, electrical circuits, chemical balancing, data compression, information retrieval, game theory, and genetics modeling, demonstrating the breadth of linear algebra as an essential tool in science and engineering.","total_hours":8.0,"subtopics":[{"subtopic_name":"Traffic Flow and Circuit Analysis","depth_level":"intermediate","estimated_hours":1.5,"description":"Modeling traffic networks as linear systems using flow conservation equations. Application to street networks and roundabout optimization. Circuit analysis using Kirchhoff's laws leading to linear systems. Solving for currents and voltages in resistor networks.","prerequisites_within_course":["System of Linear Equations"]},{"subtopic_name":"Chemical Equation Balancing and Data Compression","depth_level":"introductory","estimated_hours":1.0,"description":"Balancing chemical equations as solving underdetermined linear systems. Mass conservation constraints. SVD-based image compression including quality versus compression ratio tradeoffs. Implementation considerations.","prerequisites_within_course":["Rank-k Approximation and the Power Method"]},{"subtopic_name":"Markov Matrices and PageRank","depth_level":"intermediate","estimated_hours":1.5,"description":"Introduction to stochastic matrices and Markov chains. Stationary distributions and eigenvalue properties. Google PageRank as eigenvector computation. Teleportation and damping factors. Convergence analysis.","prerequisites_within_course":["Eigenvalues and Eigenvectors: Computation","Spectral Decomposition Review"]},{"subtopic_name":"Game Strategies and Information Retrieval","depth_level":"introductory","estimated_hours":1.5,"description":"Matrix games and payoff matrices in game theory. Solution concepts using linear programming duality. Term-document matrices in information retrieval. TF-IDF weighting and cosine similarity for document ranking.","prerequisites_within_course":["Singular Value Decomposition: Theory"]},{"subtopic_name":"Word Embeddings, Bias in Data, and Chessboard Patterns","depth_level":"introductory","estimated_hours":1.5,"description":"Word embeddings using matrix factorization techniques including SVD-based methods. Detection and measurement of bias in data representations. King's moves on chessboards as linear transformations. Special matrix patterns in combinatorics.","prerequisites_within_course":["Linear Mappings, Kernel, and Image"]},{"subtopic_name":"Genetics Modeling and Course Integration","depth_level":"introductory","estimated_hours":1.0,"description":"Population genetics using Leslie matrices for age-structured populations. Eigenvalue analysis for population growth rates. Integration of course concepts demonstrating interconnectedness of linear algebra topics. Review of key theoretical foundations and their applications.","prerequisites_within_course":["Markov Matrices and PageRank"]}]}],"total_hours":45.0,"coverage_summary":"This undergraduate Linear Algebra course provides a comprehensive introduction to the fundamental concepts and techniques of linear algebra with emphasis on computational proficiency and practical applications. Spanning 45 contact hours across six units, the syllabus progresses from foundational concepts of linearity and systems of linear equations through the abstract framework of vector spaces and linear transformations, culminating in advanced topics of eigenvalues, eigenvectors, and singular value decomposition. The curriculum balances theoretical understanding with extensive worked examples and applications drawn from machine learning, computer graphics, data science, search engine technology, and engineering domains. Students develop mathematical modeling skills using vectors, matrices, and linear systems, while gaining hands-on experience with computational techniques including Gaussian elimination, diagonalization, Gram-Schmidt orthogonalization, and SVD-based dimensionality reduction. The course prerequisites in discrete mathematics and advanced engineering mathematics ensure students possess the necessary mathematical maturity for rigorous reasoning while maintaining accessibility for undergraduates seeking to apply linear algebraic methods in computer and allied sciences."}
+==================================================
+
+==================================================
+[2026-04-19T12:35:20.934225] NODE: expander
+--------------------------------------------------
+<think>The user wants me to generate a complete syllabus expansion for a Linear Algebra course (MATH2059) at the undergraduate level. The critic feedback indicates that the previous attempt failed to produce a syllabus at all, so I need to generate a complete, valid JSON syllabus.
+
+Let me analyze the course metadata:
+- Course Name: Linear Algebra
+- Code: MATH2059
+- Level: UG (Undergraduate)
+- Credit Hours: 3
+- Domain: Mathematics
+- Prerequisites: Discrete Mathematics, Advanced Engineering Mathematics 1 & 2
+
+Total contact hours: 45 (given in curriculum)
+3 credit hours = 45 contact hours (15 hours per credit)
+
+The curriculum has 6 units with specific hour allocations:
+- Unit I: 1 Hour
+- Unit II: 8 Hours
+- Unit III: 12 Hours
+- Unit IV: 8 Hours
+- Unit V: 8 Hours
+- Unit VI: 8 Hours
+
+Total: 1+8+12+8+8+8 = 45 hours ✓
+
+Now I need to expand each unit into subtopics (3-7 per unit), with depth levels matching UG, and proper prerequisites within the course.
+
+Let me design the structure:
+
+**Unit I: Introduction to Linear Algebra (1 Hour)**
+This is introductory - very brief, just setting the stage. Since it's only 1 hour, I'll have 3-4 brief subtopics.
+
+**Unit II: System of Linear Equations (8 Hours)**
+More substantial - need 4-6 subtopics.
+
+**Unit III: Vector Spaces & Linear Transformation (12 Hours)**
+The heaviest unit - need 6-7 subtopics.
+
+**Unit IV: Eigenvalues & Eigenvectors (8 Hours)**
+
+
+4-5 subtopics covering the core concepts and applications.
+
+**Unit V: Singular Value Decomposition (8 Hours)**
+4-5 subtopics with computational emphasis.
+
+**Unit VI: Applications of Linear Algebra (8 Hours)**
+4-5 subtopics for practical implementations.
+
+Now I'll structure this with depth levels and estimated hours per subtopic, ensuring prerequisites align logically throughout. Each subtopic needs a name, depth designation, time estimate, description, and intra-course dependencies. The output must be valid JSON without markdown formatting.</think>
+
+{
+  "course_metadata": {
+    "course_name": "Linear Algebra",
+    "course_code": "MATH2059",
+    "course_level": "UG",
+    "credit_hours": 3,
+    "domain": "Mathematics",
+    "institution": "",
+    "semester": "",
+    "prerequisites": ["Discrete Mathematics", "Advanced Engineering Mathematics 1 & 2"]
+  },
+  "topics": [
+    {
+      "topic_name": "Introduction to Linear Algebra",
+      "unit_number": 1,
+      "learning_intent": "Understand the fundamental concept of linearity and its distinction from non-linearity, and recognize real-world applications where linear algebra plays a critical role.",
+      "total_hours": 1.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Linearity vs. Non-linearity",
+          "depth_level": "introductory",
+          "estimated_hours": 0.25,
+          "description": "Definition of linearity including superposition and homogeneity principles. Comparison with non-linear phenomena to establish why linear systems are mathematically tractable and widely used as approximations.",
+          "prerequisites_within_course": []
+        },
+        {
+          "subtopic_name": "Real-life Examples of Linear Systems",
+          "depth_level": "introductory",
+          "estimated_hours": 0.25,
+          "description": "Everyday scenarios modeled linearly: supply-demand economics, mixing problems, structural analysis. Emphasis on identifying linear relationships in complex systems.",
+          "prerequisites_within_course": ["Linearity vs. Non-linearity"]
+        },
+        {
+          "subtopic_name": "Overview of Linear Algebra Concepts",
+          "depth_level": "introductory",
+          "estimated_hours": 0.25,
+          "description": "Survey of core topics: vectors, matrices, linear transformations, eigenvalues. High-level roadmap connecting these concepts to provide orientation before detailed study.",
+          "prerequisites_within_course": []
+        },
+        {
+          "subtopic_name": "Applications: Google PageRank and Google Maps",
+          "depth_level": "introductory",
+          "estimated_hours": 0.25,
+          "description": "Case studies demonstrating linear algebra's power in modern technology: PageRank as eigenvector problem, navigation algorithms in mapping services. Motivation for the course.",
+          "prerequisites_within_course": ["Overview of Linear Algebra Concepts"]
+        }
+      ]
+    },
+    {
+      "topic_name": "System of Linear Equations",
+      "unit_number": 2,
+      "learning_intent": "Represent and solve systems of linear equations using matrix methods, understand the geometric interpretation of solutions, and apply these techniques to practical problems in machine learning, cryptography, and color models.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Vectors and Linear Combinations",
+          "depth_level": "introductory",
+          "estimated_hours": 1.5,
+          "description": "Introduction to vectors as ordered n-tuples of numbers. Operations: addition, scalar multiplication. Linear combination concept: c1*v1 + c2*v2 + ... + ck*vk. Geometric visualization in 2D and 3D. Spanning interpretation.",
+          "prerequisites_within_course": ["Linearity vs. Non-linearity"]
+        },
+        {
+          "subtopic_name": "Visualization of Linear Equations",
+          "depth_level": "introductory",
+          "estimated_hours": 1.0,
+          "description": "Geometric interpretation of systems of equations as intersecting lines (2D) and planes (3D). Row picture vs. column picture representation. Understanding solution sets as geometric objects.",
+          "prerequisites_within_course": ["Vectors and Linear Combinations"]
+        },
+        {
+          "subtopic_name": "Matrix Elimination and Gaussian Elimination",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.0,
+          "description": "Row operations: swapping, scaling, adding multiples. Forward elimination to echelon form. Pivots and leading variables. Back substitution. Augmented matrices. Connection between elimination and matrix factorization.",
+          "prerequisites_within_course": ["Visualization of Linear Equations"]
+        },
+        {
+          "subtopic_name": "Rank of a Matrix",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Definition of rank as the number of pivots after elimination. Rank and linear independence relationship. Full rank, rank-deficient, and full row/column rank cases. Rank conditions for solution existence.",
+          "prerequisites_within_course": ["Matrix Elimination and Gaussian Elimination"]
+        },
+        {
+          "subtopic_name": "Echelon Forms and Normal Forms",
+          "depth_level": "intermediate",
+          "estimated_hours": 0.75,
+          "description": "Row echelon form and reduced row echelon form (RREF). Procedures to obtain RREF. Identifying free and basic variables from the form. Solution writing from RREF.",
+          "prerequisites_within_course": ["Rank of a Matrix"]
+        },
+        {
+          "subtopic_name": "Homogeneous and Non-homogeneous Systems",
+          "depth_level": "intermediate",
+          "estimated_hours": 0.75,
+          "description": "Homogeneous systems (Ax = 0): always have trivial solution, non-trivial solutions when rank < n. Non-homogeneous systems (Ax = b): solution existence condition (rank(A) = rank(A|b)). Parametric solution forms.",
+          "prerequisites_within_course": ["Echelon Forms and Normal Forms"]
+        },
+        {
+          "subtopic_name": "Applications: Machine Learning, Cryptography, Color Models",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Practical case studies: solving normal equations in linear regression (ML); encoding/decoding messages using linear systems (cryptography); representing colors as vectors and transforming between RGB and CMYK color spaces.",
+          "prerequisites_within_course": ["Homogeneous and Non-homogeneous Systems"]
+        }
+      ]
+    },
+    {
+      "topic_name": "Vector Spaces and Linear Transformation",
+      "unit_number": 3,
+      "learning_intent": "Comprehend abstract vector space concepts including subspaces, basis, dimension, and linear transformations. Apply the rank-nullity theorem and use Gram-Schmidt orthogonalization for practical applications in data smoothing and image scaling.",
+      "total_hours": 12.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Vector Spaces and Subspaces",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Axiomatic definition of vector space over R or C. Examples: R^n, polynomials, matrices, function spaces. Subspace definition and tests: closed under addition and scalar multiplication. Span as a subspace. Column space and null space as subspaces.",
+          "prerequisites_within_course": ["Vectors and Linear Combinations", "Rank of a Matrix"]
+        },
+        {
+          "subtopic_name": "Linear Span and Linear Independence",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.0,
+          "description": "Span of a set of vectors. Linear combination interpretation. Linear dependence and independence: definition via trivial combination (only trivial solution = independent). Dependency relations. Spanning sets and their minimal subsets.",
+          "prerequisites_within_course": ["Vector Spaces and Subspaces"]
+        },
+        {
+          "subtopic_name": "Basis and Dimension",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Basis as a linearly independent spanning set. Standard bases for R^n. Coordinates relative to a basis. Dimension as cardinality of basis. Dimension theorem for subspaces. Invariance of dimension (all bases have same size).",
+          "prerequisites_within_course": ["Linear Span and Linear Independence"]
+        },
+        {
+          "subtopic_name": "Linear Mappings",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Linear transformations defined on vector spaces. Matrix representation of linear maps relative to bases. Domain, codomain, range. Composition of linear maps. Invertible (nonsingular) linear transformations. Isomorphisms between vector spaces.",
+          "prerequisites_within_course": ["Basis and Dimension"]
+        },
+        {
+          "subtopic_name": "Kernel, Image, and Null Space",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Kernel (null space) of a linear transformation: set of vectors mapping to zero. Image (range) of a transformation. Nullity and rank defined dimensionally. Relationship between these spaces and the transformation matrix.",
+          "prerequisites_within_course": ["Linear Mappings"]
+        },
+        {
+          "subtopic_name": "Rank-Nullity Theorem",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Statement and proof of rank-nullity theorem: dim(domain) = rank + nullity. Applications: determining if a linear map is injective or surjective from dimensions. Consequences for matrix transformations.",
+          "prerequisites_within_course": ["Kernel, Image, and Null Space"]
+        },
+        {
+          "subtopic_name": "Similarity of Matrices and Change of Basis",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Similar matrices B = P^{-1}AP represent same linear transformation in different bases. Similarity invariants: determinant, trace, eigenvalues. Change of basis matrix computation. Diagonalization as a special case of change of basis.",
+          "prerequisites_within_course": ["Rank-Nullity Theorem"]
+        },
+        {
+          "subtopic_name": "Inner Product Spaces, Norms, and Orthogonality",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Inner product definition: dot product in R^n, general <u,v> = u^TAv. Cauchy-Schwarz inequality. Vector norms: Euclidean, taxicab, infinity norm. Orthogonal vectors: definition via zero inner product. Orthogonal complement.",
+          "prerequisites_within_course": ["Similarity of Matrices and Change of Basis"]
+        },
+        {
+          "subtopic_name": "Gram-Schmidt Process and Applications",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Gram-Schmidt orthogonalization procedure to produce orthonormal basis from any basis. QR decomposition connection. Applications: data smoothing via projection onto lower-dimensional subspaces, image scaling using coordinate transformations.",
+          "prerequisites_within_course": ["Inner Product Spaces, Norms, and Orthogonality"]
+        }
+      ]
+    },
+    {
+      "topic_name": "Eigenvalues and Eigenvectors",
+      "unit_number": 4,
+      "learning_intent": "Compute and interpret eigenvalues and eigenvectors for applications in facial recognition, feature extraction, and search engine algorithms. Use diagonalization for matrix powers and apply symmetric matrix properties to quadratic forms.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Characteristic Polynomial and Cayley-Hamilton Theorem",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Characteristic polynomial det(A - λI). Finding eigenvalues as roots of characteristic polynomial. Cayley-Hamilton theorem: every matrix satisfies its characteristic equation. Applications: computing powers of matrices using characteristic polynomial.",
+          "prerequisites_within_course": ["Linear Mappings", "Rank of a Matrix"]
+        },
+        {
+          "subtopic_name": "Eigenvalues and Eigenvectors: Computation and Properties",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Eigenvalue-eigenvector definition: Av = λv. Finding eigenvectors for known eigenvalues. Eigenspace as null space of (A - λI). Algebraic multiplicity vs. geometric multiplicity. Linear independence of eigenvectors from distinct eigenvalues.",
+          "prerequisites_within_course": ["Characteristic Polynomial and Cayley-Hamilton Theorem"]
+        },
+        {
+          "subtopic_name": "Geometric Interpretation of Eigenvalues and Eigenvectors",
+          "depth_level": "introductory",
+          "estimated_hours": 1.0,
+          "description": "Eigenvectors as directions unchanged by the transformation (scaled only). Eigenvalue as scaling factor. Visualizing transformations: identifying stretching/compressing directions. Fixed directions in rotation matrices (complex eigenvalues).",
+          "prerequisites_within_course": ["Eigenvalues and Eigenvectors: Computation and Properties"]
+        },
+        {
+          "subtopic_name": "Diagonalization and Matrix Powers",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Diagonalizable matrices: A = PDP^{-1} where D is diagonal. Conditions for diagonalization: sufficient condition of n distinct eigenvalues; necessary and sufficient: enough independent eigenvectors. Computing A^k via diagonalization: A^k = PD^kP^{-1}.",
+          "prerequisites_within_course": ["Geometric Interpretation of Eigenvalues and Eigenvectors"]
+        },
+        {
+          "subtopic_name": "Symmetric Matrices and Quadratic Forms",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Symmetric matrix properties: real eigenvalues, orthogonal eigenvectors. Spectral theorem for symmetric matrices. Quadratic forms: x^TAx, classification as positive definite, negative definite, indefinite. Principal axis theorem. Constrained optimization with quadratic forms.",
+          "prerequisites_within_course": ["Diagonalization and Matrix Powers"]
+        },
+        {
+          "subtopic_name": "Least Squares Method",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Overdetermined systems (more equations than unknowns) and approximate solutions. Normal equations: (A^TA)x = A^Tb. Geometric interpretation: projection onto column space. Applications in data fitting and machine learning regression.",
+          "prerequisites_within_course": ["Symmetric Matrices and Quadratic Forms"]
+        },
+        {
+          "subtopic_name": "Applications: Facial Recognition, Feature Extraction, Search Engines",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Eigenfaces: using principal eigenvectors of face image covariance for recognition. Eigenvalue-based feature importance in dimensionality reduction. PageRank revisited as eigenvector of the web link matrix with eigenvalue 1.",
+          "prerequisites_within_course": ["Least Squares Method"]
+        }
+      ]
+    },
+    {
+      "topic_name": "Singular Value Decomposition",
+      "unit_number": 5,
+      "learning_intent": "Understand SVD as a generalization of eigenvalue decomposition to non-square matrices, apply rank-k approximation for data compression, and implement the power method for computing dominant singular values in PCA and information retrieval.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Spectral Decomposition for Symmetric Matrices",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Review of eigendecomposition for symmetric matrices: A = QΛQ^T with orthogonal Q. Properties: orthonormal basis of eigenvectors, real eigenvalues. Spectral decomposition as expansion in rank-1 projections: A = Σ λ_i * q_i * q_i^T.",
+          "prerequisites_within_course": ["Symmetric Matrices and Quadratic Forms"]
+        },
+        {
+          "subtopic_name": "Singular Value Decomposition (SVD) Fundamentals",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.0,
+          "description": "SVD definition: A = UΣV^T where U and V are orthogonal, Σ is diagonal with singular values. Relationship to eigenvalues of A^TA and AA^T. Left singular vectors (columns of U) and right singular vectors (columns of V). Full vs. reduced SVD.",
+          "prerequisites_within_course": ["Spectral Decomposition for Symmetric Matrices"]
+        },
+        {
+          "subtopic_name": "Rank-k Approximation and the Best Rank-k Approximation",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Truncated SVD with k singular values: A_k = U_k Σ_k V_k^T. Eckart-Young theorem: A_k is the best rank-k approximation in Frobenius norm. Error bound using discarded singular values. Applications in image compression and noise reduction.",
+          "prerequisites_within_course": ["Singular Value Decomposition (SVD) Fundamentals"]
+        },
+        {
+          "subtopic_name": "Power Method for Computing Dominant Singular Values",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Power iteration for dominant eigenvector of A^TA. Rayleigh quotient interpretation. Convergence behavior and rate dependence on eigenvalue gap. Deflation for finding subsequent singular vectors. Practical implementation considerations.",
+          "prerequisites_within_course": ["Rank-k Approximation and the Best Rank-k Approximation"]
+        },
+        {
+          "subtopic_name": "Applications: PCA, Data Centering, Document Ranking, Clustering",
+          "depth_level": "intermediate",
+          "estimated_hours": 2.5,
+          "description": "Principal Component Analysis via SVD of centered data matrix. Data centering (subtracting mean) for PCA. Latent Semantic Indexing for document ranking in information retrieval. K-means clustering connection to SVD-based dimensionality reduction. Worked examples with real datasets.",
+          "prerequisites_within_course": ["Power Method for Computing Dominant Singular Values"]
+        }
+      ]
+    },
+    {
+      "topic_name": "Applications of Linear Algebra",
+      "unit_number": 6,
+      "learning_intent": "Solve practical engineering and scientific problems using linear algebra techniques including traffic flow analysis, circuit analysis, chemical equation balancing, and Markov chain modeling for PageRank. Implement compression algorithms using SVD and understand bias implications in data representations.",
+      "total_hours": 8.0,
+      "subtopics": [
+        {
+          "subtopic_name": "Traffic Flow and Circuit Analysis",
+          "depth_level": "introductory",
+          "estimated_hours": 1.5,
+          "description": "Modeling traffic networks as linear systems using flow conservation (Kirchhoff's current law). Solving for unknown traffic volumes at intersections. Kirchhoff's voltage law for electrical circuits. Writing and solving circuit equations for resistor networks.",
+          "prerequisites_within_course": ["Matrix Elimination and Gaussian Elimination", "Rank of a Matrix"]
+        },
+        {
+          "subtopic_name": "Chemical Equation Balancing",
+          "depth_level": "introductory",
+          "estimated_hours": 0.75,
+          "description": "Representing chemical reactions as systems of linear equations. Balancing stoichiometric coefficients by solving homogeneous systems. Identifying conservation equations from molecular composition. Worked examples including combustion and redox reactions.",
+          "prerequisites_within_course": ["Homogeneous and Non-homogeneous Systems"]
+        },
+        {
+          "subtopic_name": "Data Compression Using SVD",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.0,
+          "description": "Image representation as a matrix. Applying SVD and truncating to k singular values for compression. Compression ratio calculation and trade-off with reconstruction error. Implementation using Python/MATLAB with sample images. Comparison with JPEG compression principles.",
+          "prerequisites_within_course": ["Rank-k Approximation and the Best Rank-k Approximation"]
+        },
+        {
+          "subtopic_name": "Word Embeddings and Vector Representations",
+          "depth_level": "introductory",
+          "estimated_hours": 0.75,
+          "description": "Representing words as vectors in high-dimensional space using co-occurrence matrices. Dimensionality reduction via SVD (Latent Semantic Analysis). Semantic relationships encoded in vector differences. Applications in natural language processing.",
+          "prerequisites_within_course": ["Singular Value Decomposition (SVD) Fundamentals"]
+        },
+        {
+          "subtopic_name": "Markov Matrices and PageRank",
+          "depth_level": "intermediate",
+          "estimated_hours": 1.5,
+          "description": "Stochastic matrices and Markov chains. Power method for stationary distribution. PageRank as application: web graph as Markov matrix, damping factor, solving for stationary distribution. Sensitivity analysis and interpretation of rankings.",
+          "prerequisites_within_course": ["Power Method for Computing Dominant Singular Values", "Diagonalization and Matrix Powers"]
+        },
+        {
+          "subtopic_name": "Bias in Data and Geometric Interpretations",
+          "depth_level": "introductory",
+          "estimated_hours": 0.75,
+          "description": "How data representation choices introduce bias. Geometric view: alignment of data with principal components. Analyzing high-dimensional representations for discriminatory patterns. Case studies in algorithmic bias and fairness considerations.",
+          "prerequisites_within_course": ["Applications: PCA, Data Centering, Document Ranking, Clustering"]
+        },
+        {
+          "subtopic_name": "Game Strategies and Information Retrieval",
+          "depth_level": "introductory",
+          "estimated_hours": 1.0,
+          "description": "Matrix games and payoff matrices in game theory. Solving two-player zero-sum games using linear algebra (dominance, saddle points). Chess move matrices and move prediction. Term-document matrices and TF-IDF ranking in search engines.",
+          "prerequisites_within_course": ["Homogeneous and Non-homogeneous Systems", "Singular Value Decomposition (SVD) Fundamentals"]
+        },
+        {
+          "subtopic_name": "Special Applications: Chessboard Moves and Genetics Modeling",
+          "depth_level": "introductory",
+          "estimated_hours": 0.75,
+          "description": "Chessboard coverage problems as linear independence and spanning. Knight's tour as matrix exponentiation problem. Leslie matrices in population genetics for age-structured populations. Predator-prey models using linear recurrence relations.",
+          "prerequisites_within_course": ["Matrix Powers", "Diagonalization and Matrix Powers"]
+        }
+      ]
+    }
+  ],
+  "total_hours": 45.0,
+  "coverage_summary": "This undergraduate Linear Algebra course provides a comprehensive treatment of fundamental concepts and their applications in science, engineering, and data science. The syllabus progresses from foundational concepts of linearity and systems of linear equations (Unit I-II), through the abstract theory of vector spaces, linear transformations, and orthogonality (Unit III), to the practical applications of eigenvalues, eigenvectors, and SVD in machine learning and information retrieval (Units IV-V). Unit VI integrates all concepts through diverse real-world applications including traffic systems, circuit analysis, data compression, PageRank, and genetics modeling. With 45 contact hours distributed across 6 units, the course balances theoretical rigor with computational skills, emphasizing geometric intuition alongside algebraic manipulation. Students develop proficiency in mathematical modeling, developing their ability to formulate and solve complex problems in computer science, data analytics, and deep learning as evidenced by the course outcomes. Worked examples, computational implementations, and applications to modern technologies provide context and motivation throughout the curriculum."
+}
+==================================================
+
+==================================================
+[2026-04-19T12:35:42.594013] NODE: gap_critic
+--------------------------------------------------
+<think>Let me analyze this Linear Algebra syllabus for gaps according to the Gap Critic System Prompt criteria.
+
+The course is:
+- Name: Linear Algebra
+- Level: UG
+- Credit Hours: 3
+- Prerequisites: Discrete Mathematics, Advanced Engineering Mathematics 1 & 2
+
+Let me check for the four types of gaps:
+
+1. **missing_prerequisite**: A subtopic requires knowledge that is not covered anywhere in this course or listed as a course prerequisite.
+
+2. **coverage_gap**: A topic that is clearly implied by the course name, domain, or explicitly listed in the raw curriculum is absent from the expansion.
+
+3. **sequencing_issue**: Topics or subtopics are ordered in a way that a student cannot logically follow.
+
+4. **depth_mismatch**: A subtopic's depth level or description does not match what is appropriate for the course level.
+
+Let me go through each unit:
+
+**Unit 1: Introduction to Linear Algebra**
+- Covers linearity, real-life examples, overview, and applications (PageRank, Google Maps)
+- Looks reasonable for UG level
+- 1 hour total - appropriate
+
+**Unit 2: System of Linear Equations**
+- Vectors and linear combinations → Visualization → Matrix elimination → Rank → Echelon forms → Homogeneous/non-homogeneous → Applications
+- Sequencing looks logical
+- Coverage: This unit covers the basics of solving linear systems - good
+
+**Unit 3: Vector Spaces and Linear Transformation**
+- Vector spaces → Linear span/independence → Basis/dimension → Linear mappings → Kernel/image/null space → Rank-nullity → Similarity/change of basis → Inner product spaces → Gram-Schmidt
+- This is a comprehensive coverage of vector spaces
+- Sequencing looks logical
+
+**Unit 4: Eigenvalues and Eigenvectors**
+- Characteristic polynomial/CH theorem → Eigenvalues/eigenvectors computation → Geometric interpretation → Diagonalization → Symmetric matrices/quadratic forms → Least squares → Applications
+
+
+- The progression builds from fundamental definitions through computational techniques, then connects to symmetric matrices and least squares applications. The final applications section bridges to practical uses like facial recognition.
+
+**Unit 5: Singular Value Decomposition**
+- Spectral decomposition → SVD fundamentals → Rank-k approximation → Power method → Applications
+- Sequencing looks logical
+- Prerequisites listed: Spectral Decomposition for Symmetric Matrices
+
+**Unit 6: Applications of Linear Algebra**
+- Traffic Flow and Circuit Analysis
+- Chemical Equation Balancing
+- Data Compression Using SVD
+- Word Embeddings and Vector Representations
+- Markov Matrices and PageRank
+- Bias in Data and Geometric Interpretations
+- Game Strategies and Information Retrieval
+- Special Applications: Chessboard Moves and Genetics Modeling
+
+Now checking for potential gaps:
+
+1. **Matrix Operations Coverage**: The course includes Gaussian elimination, matrix operations, and transformations throughout, but there may be room for a dedicated section on fundamental matrix operations beyond just elimination.
+
+2. **Determinants**: I'm not finding a dedicated subtopic for determinants. While students might encounter them in the context of eigenvalues (characteristic polynomial), a systematic treatment of determinant properties and computations seems absent. This could be a significant gap for an introductory course.
+
+3. **Matrix Operations**: Beyond basic elimination, the course may not adequately cover matrix addition, scalar multiplication, and matrix multiplication.
+
+4. **Complex Numbers**: Some topics like complex eigenvalues could require background in complex numbers. Discrete Mathematics might cover sets and logic, but the course doesn't explicitly establish whether complex numbers are prerequisites.
+
+5. **Complex Eigenvalues**: The geometric interpretation mentions complex eigenvalues when discussing fixed directions in rotation matrices, but the prerequisites reference linear mappings and rank of a matrix rather than complex number fundamentals.
+
+6. **Prerequisites for Gaussian Elimination**: The "Matrix Elimination and Gaussian Elimination" subtopic depends on "Visualization of Linear Equations," which itself requires "Vectors and Linear Combinations." This creates a prerequisite chain that's unclear about what mathematical foundations students need before tackling elimination.
+
+7. **Determinant Coverage Gap**: The course description references "linear transformations" extensively, yet there's no dedicated subtopic for determinants. The characteristic polynomial references det(A - λI), but only as part of a formula—properties and computation of determinants aren't explicitly taught anywhere in the curriculum.
+
+8. **Matrix Multiplication Gap**: Matrix operations like multiplication aren't explicitly covered in Unit 2, which is unusual for an introductory linear algebra course. Students need to understand how to multiply matrices to progress through the material.
+
+9. **Matrix Inverses Gap**: The invertibility of linear transformations is discussed in Unit 3, but matrix inverses aren't systematically taught. This creates a problem for students solving systems like Ax = b when they need to find A⁻¹.
+
+10. **Sequencing Concern with "Matrix Powers"**: The applications unit references "Matrix Powers" as a prerequisite for certain topics, but this subtopic doesn't appear to exist as a separate teaching unit in the syllabus.
+
+Checking the actual prerequisite structure in Unit 6, the "Special Applications: Chessboard Moves and Genetics" references "Matrix Powers" and "Diagonalization and Matrix Powers," but neither of these is developed as a standalone subtopic. Unit 4 has "Diagonalization and Matrix Powers," which should cover this, but the phrasing in the prerequisite list seems to conflate topics.
+
+There are some depth inconsistencies worth noting. The "Overview of Linear Algebra Concepts" subtopic allocates only 0.25 hours but intends to survey vectors, matrices, transformations, and eigenvalues—a substantial amount of material for such a brief timeframe. Similarly, "Chemical Equation Balancing" receives 0.75 hours, and the description suggests it's meant to be more exploratory than the other subtopics.
+
+The core issues I'm identifying are: a missing prerequisite for determinants in the characteristic polynomial subtopic, the ambiguous "Matrix Powers" reference in Unit 6 without clear development, and insufficient time allocation for the overview section given its breadth. - Topic: SVD for non-square matrices, rank-k approximation for compression, power method for computing singular values in PCA and information retrieval
+- Coverage is solid
+
+5. **Prerequisite Chain for Gaussian Elimination**
+   - "Matrix Elimination and Gaussian Elimination" depends on "Visualization of Linear Equations" 
+   - "Visualization of Linear Equations" depends on "Vectors and Linear Combinations"
+   - "Vectors and Linear Combinations" depends on "Linearity vs. Non-linearity"
+   - The chain looks correct.
+
+6. **Determinant Coverage**
+   - The characteristic polynomial definition is provided: det(A - λI) but properties and computation aren't systematically covered.
+
+7. **Matrix Operations Fundamentals**
+   - Unit 2 doesn't include a dedicated subtopic on matrix addition, scalar multiplication, or matrix multiplication, which are core linear algebra operations typically covered in introductory courses. This could be a meaningful gap.
+
+The main issues I'm seeing are the missing determinant properties subtopic and the lack of explicit matrix operations coverage, though these might be embedded throughout the course material. The structure seems sound overall, with prerequisites properly aligned and the three-hour scope covering the essential topics effectively.</think>
+
+{
+  "has_gaps": true,
+  "gaps": [
+    {
+      "gap_type": "coverage_gap",
+      "location": "Determinants (implicitly used in Unit 4)",
+      "description": "The course covers det(A - λI) in the characteristic polynomial definition but does not have a dedicated subtopic for Determinants. Properties of determinants (row operations effect on determinant, cofactor expansion, adjoint method for inverse) are not explicitly taught, despite being a fundamental topic in any undergraduate linear algebra course.",
+      "suggested_fix": "Add a subtopic 'Determinants and Their Properties' in Unit 2 or Unit 4 covering: determinant definition via cofactor expansion, effect of row operations on determinants, determinant properties (multiplicative, transpose invariance), using determinants to test invertibility, and Cramer's rule for solving Ax = b. This should appear before 'Characteristic Polynomial' or be introduced as a prerequisite within-course reference."
+    },
+    {
+      "gap_type": "coverage_gap",
+      "location": "Matrix Operations and Algebra",
+      "description": "Unit 2 covers vectors, linear combinations, and Gaussian elimination, but does not include explicit coverage of fundamental matrix operations: matrix addition, scalar multiplication, matrix-matrix multiplication, and matrix-vector multiplication. These operations are essential prerequisites for understanding linear combinations, matrix transformations, and are implicitly used throughout the course.",
+      "suggested_fix": "Add a subtopic 'Matrix Operations and Algebra' in Unit 2 after 'Vectors and Linear Combinations' covering: matrix addition and scalar multiplication, matrix-matrix multiplication, matrix-vector multiplication, identity matrix, transpose, trace. This should precede 'Matrix Elimination and Gaussian Elimination' to ensure students can perform matrix operations before working with augmented matrices."
+    },
+    {
+      "gap_type": "sequencing_issue",
+      "location": "Special Applications: Chessboard Moves and Genetics Modeling (Unit 6)",
+      "description": "The prerequisites list 'Matrix Powers' as a prerequisite, but this exact subtopic name does not exist in the syllabus. The closest is 'Diagonalization and Matrix Powers' (Unit 4), but simply referencing 'Matrix Powers' without connection to the diagonalization context is ambiguous and could confuse implementers.",
+      "suggested_fix": "Change the prerequisite from 'Matrix Powers' to 'Diagonalization and Matrix Powers' to correctly reference the subtopic where matrix powers via diagonalization are covered. Alternatively, if matrix powers should be a standalone skill, add it as a subtopic in Unit 4 before the applications unit."
+    },
+    {
+      "gap_type": "depth_mismatch",
+      "location": "Overview of Linear Algebra Concepts (Unit 1)",
+      "description": "The subtopic allocates only 0.25 hours but promises to survey 'vectors, matrices, linear transformations, eigenvalues' with a 'high-level roadmap connecting these concepts.' This scope is too broad for 15 minutes at an introductory level—students cannot
+==================================================
