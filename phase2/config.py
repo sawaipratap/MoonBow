@@ -11,13 +11,8 @@ class Config:
     LLM_TEMPERATURE: float = float(os.getenv("LLM_TEMPERATURE", "0.1"))  # lower for evaluation
     LLM_MAX_TOKENS: int = int(os.getenv("LLM_MAX_TOKENS", "4096"))
 
-    # Dependency mode — same switch as phase1
-    DEPENDENCY_MODE: str = os.getenv("DEPENDENCY_MODE", "mock")
-
     # Paths
     PROMPTS_DIR: str = os.path.join(os.path.dirname(__file__), "prompts")
-    MOCK_OUTPUT_DIR: str = os.path.join(os.path.dirname(__file__), "mock_outputs")
-    PHASE1_OUTPUT_DIR: str = os.path.join(os.path.dirname(__file__), "..", "phase1", "mock_outputs")
     TEAM_SKILLS_DIR: str = os.path.join(os.path.dirname(os.path.dirname(__file__)), "skills", "knowledge")
 
     # Phase 2 tuning

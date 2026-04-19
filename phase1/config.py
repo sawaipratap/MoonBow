@@ -16,9 +16,6 @@ class Config:
 
     PROMPTS_DIR: str = os.path.join(os.path.dirname(__file__), "prompts")
 
-    DEPENDENCY_MODE: str = os.getenv("DEPENDENCY_MODE", "mock")
-    TEST_DATA_DIR: str = os.path.join(os.path.dirname(__file__), "test_data")
-    MOCK_OUTPUT_DIR: str = os.path.join(os.path.dirname(__file__), "mock_outputs")
     TEAM_SKILLS_DIR: str = os.path.join(os.path.dirname(os.path.dirname(__file__)), "skills", "knowledge")
 
 config = Config()
