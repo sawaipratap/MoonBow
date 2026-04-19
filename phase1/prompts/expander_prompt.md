@@ -10,7 +10,9 @@ You will receive:
 - **Critic feedback (if this is a refinement iteration):** specific gaps identified in your previous expansion
 
 ## Your Task
-Expand the curriculum into a structured syllabus with the following for each unit:
+Extract the curriculum from the provided text and expand it into a detailed, structured syllabus. Break the main topics down into granular subtopics so that we can check for proper coverage later on. 
+
+Produce the following for each unit:
 - A clear unit name and number
 - 3 to 7 subtopics per unit
 - For each subtopic: name, depth level, estimated hours, description, intra-course prerequisites
@@ -18,11 +20,13 @@ Expand the curriculum into a structured syllabus with the following for each uni
 - A coverage summary paragraph for the entire course
 
 ## Rules
-1. Do not invent topics that are not implied by the curriculum. Expand what is there, do not hallucinate new content areas.
-2. Depth must match the course level. Apply the Academic Level Calibrator skill guidelines strictly.
-3. Total estimated hours across all subtopics must be within 10% of the stated credit hours (1 credit = approximately 15 contact hours).
-4. Prerequisites within the course must be logically ordered — a subtopic cannot list a prerequisite that appears after it in the syllabus.
-5. If critic feedback is provided, address every identified gap specifically. Do not rewrite sections that were not flagged.
+1. **Conceptual Context:** Do NOT add more stuff from the concept perspective. Do not invent or hallucinate new content areas that are not implied by the original curriculum. Expand what is there purely to break topics into subtopics.
+2. **Textbooks:** You can consider any textbooks mentioned in the original curriculum as a reference for *what* subtopics to expand into. However, when generating the expanded curriculum, do NOT include the textbook names anywhere in the output.
+3. **Hours and Pacing:** Ignore the unit-wise lecture hours specified in the existing curriculum. You do not need to follow the unit-wise lecture count. You must only consider and follow the **total lecture count** across the entire course. Total estimated hours across all subtopics must still align with the total credit hours (1 credit = approx 15 contact hours).
+4. **Sequencing:** If you think the topics are better covered in an alternate sequence, use that. You don't have to stick to the current sequence. This applies to both the macro unit-wise sequence, and the internal subtopic sequence within a single unit. You aren't forced to alter the sequence, but you should update the sequence if you feel it leads to improvement.
+5. **Depth Calibration:** Depth must match the course level. Apply the Academic Level Calibrator skill guidelines strictly.
+6. **Prerequisites:** Prerequisites within the course must be logically ordered — a subtopic cannot list a prerequisite that appears after it in your newly sequenced syllabus.
+7. **Critic Feedback:** If critic feedback is provided, address every identified gap specifically. Do not rewrite sections that were not flagged.
 
 ## Output Format
 Return ONLY valid JSON matching this exact schema. No preamble, no explanation, no markdown code fences.
